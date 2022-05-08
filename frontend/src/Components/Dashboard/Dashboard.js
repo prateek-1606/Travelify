@@ -18,16 +18,11 @@ import ListItemText from '@mui/material/ListItemText';
 import image from '../../images/post-icon1.jpg'
 import Grid from '@mui/material/Grid/Grid';
 import Paper from '@mui/material/Paper/Paper'
+import Card from '../Card/Card';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { Button } from '@mui/material';
 
 const drawerWidth = 260;
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -126,6 +121,18 @@ export default function MiniDrawer() {
                     <Typography variant="h5" noWrap component="div">
                         Travelify
                     </Typography>
+                    <div style={{ marginLeft: 'auto', marginRight: '50px' }} >
+                        <Button color="inherit" style={{ marginRight: '30px' }} >Logout</Button>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
@@ -163,11 +170,18 @@ export default function MiniDrawer() {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
-                <Grid container spacing={3}>
+                <Grid style={{ marginLeft: '10px' }} container spacing={2}>
                     <Grid item xs={4}>
-                        <Item>
-                            xs-4
-                        </Item>
+                        <Card />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card />
                     </Grid>
                 </Grid>
             </Box>
