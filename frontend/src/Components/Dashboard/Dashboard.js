@@ -15,7 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import image from '../../images/post-icon1.jpg'
+import image from '../../images/post-icon.jpg'
 import Grid from '@mui/material/Grid/Grid';
 import Paper from '@mui/material/Paper/Paper'
 import Card from '../Card/Card';
