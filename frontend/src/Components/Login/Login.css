@@ -1,11 +1,11 @@
 .crow {
     height:100vh;
 }
-.form-block {
+.login-form-block {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 18%;
+    margin-top: 20%;
     margin-bottom: auto;
 }
   
@@ -18,5 +18,7 @@
     font-weight: 700;
 }
 .column-2 {
-    background: rgb(163, 85, 236) !important;
+    background-image: url('https://wallpaperaccess.com/full/647493.jpg');
+    background-size: cover;
+    padding-top: 5%;
 }

@@ -21,8 +21,18 @@ import Paper from '@mui/material/Paper/Paper'
 import Card from '../Card/Card';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const drawerWidth = 260;
+
+const handleaddtravel = () => {
+
+}
+
+const handlefiltertravel = () => {
+
+}
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -121,6 +131,28 @@ export default function MiniDrawer() {
                     <Typography variant="h5" noWrap component="div">
                         Travelify
                     </Typography>
+                    <IconButton
+                        color="inherit"
+                        aria-label="add travel"
+                        onClick={handleaddtravel}
+                        edge="start"
+                        sx={{
+                            marginLeft: 5,
+                        }}
+                    >
+                        <AddCircleOutlineIcon /> <Typography variant="subtitle1" style={{ marginLeft: '10px' }} >Add Travel</Typography>
+                    </IconButton>
+                    <IconButton
+                        color="inherit"
+                        aria-label="add travel"
+                        onClick={handlefiltertravel}
+                        edge="start"
+                        sx={{
+                            marginLeft: 4,
+                        }}
+                    >
+                        <FilterAltIcon /> <Typography variant="subtitle1" style={{ marginLeft: '10px' }} >Filter Travel</Typography>
+                    </IconButton>
                     <div style={{ marginLeft: 'auto', marginRight: '50px' }} >
                         <Button color="inherit" style={{ marginRight: '30px' }} >Logout</Button>
                         <IconButton

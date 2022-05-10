@@ -21,7 +21,7 @@ const Login = () => {
             <Container fluid>
                 <Row className="crow" >
                     <Col>
-                        <div className="border-dark form-block" >
+                        <div className="border-dark login-form-block" >
                             <Form onSubmit={handleSubmit} >
                                 <h2 className="mb-1 title">Welcome Back!</h2>
                                 <text style={{ fontWeight: '400', color: 'gray' }} >Please enter your details to login!</text>
@@ -43,7 +43,12 @@ const Login = () => {
                             </Form>
                         </div>
                     </Col>
-                    <Col className="column-2" >Col 2</Col>
+                    <Col className="column-2" >
+                        <div style={{ marginLeft: "10%" }} >
+                            <h1 style={{ fontFamily: 'Playfair', color: 'white', textAlign: 'center', fontSize: '44px' }} >Travelify</h1>
+                            <p style={{ fontFamily: 'serif', color: 'white', textAlign: 'center', fontSize: '28px' }} >Find your right travelling partner</p>
+                        </div>
+                    </Col>
                 </Row>
             </Container>
         </>
