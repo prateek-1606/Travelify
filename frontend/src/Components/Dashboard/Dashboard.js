@@ -23,16 +23,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import AddTravelModel from '../AddTravelModel/AddTravelModel';
 
 const drawerWidth = 260;
-
-const handleaddtravel = () => {
-
-}
-
-const handlefiltertravel = () => {
-
-}
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -102,6 +95,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function MiniDrawer() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [openaddtravel, setaddtravel] = React.useState(false);
+
+    //console.log(openaddtravel)
+    const handleaddtravel = () => {
+        console.log(openaddtravel)
+        setaddtravel(true);
+    }
+
+    const handlefiltertravel = () => {
+
+    }
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -113,6 +117,7 @@ export default function MiniDrawer() {
 
     return (
         <Box sx={{ display: 'flex' }}>
+            <AddTravelModel isOpen={openaddtravel} setIsOpen={setaddtravel} />
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
