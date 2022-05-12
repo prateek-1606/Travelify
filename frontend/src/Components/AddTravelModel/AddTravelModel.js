@@ -15,7 +15,7 @@ const AddTask = ({ isOpen, setIsOpen }) => {
 
     return (
         <Dialog open={isOpen} onClose={!isOpen} >
-            <DialogTitle className={classes.dialog} >Create New Task</DialogTitle>
+            <DialogTitle className={classes.dialog} >Create New Travel</DialogTitle>
             <DialogContent >
                 <Input margin="normal" name="Title" label="Title" handleChange={(e) => setData({ ...data, title: e.target.value })} autoFocus half />
                 {/* <FormControl className={classes.formControl} >
