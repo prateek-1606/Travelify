@@ -1,20 +1,23 @@
 import './App.css';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
+{/* <Routes>
+    <Route path="/home" element={<Home/>} />
+</Routes> */}
 
 function App() {
   return (
     <div className="App" >
-      <HashRouter>
-        <Switch>
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-        </Switch>
-      </HashRouter>
+      <Router>
+        <Routes>
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
