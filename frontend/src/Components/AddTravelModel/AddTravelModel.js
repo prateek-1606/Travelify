@@ -7,7 +7,6 @@ const AddTask = ({ isOpen, setIsOpen }) => {
 
     const classes = useStyles();
     const [data, setData] = useState({});
-    console.log(isOpen);
 
     const handleSubmit = () => {
 
