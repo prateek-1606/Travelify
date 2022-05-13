@@ -15,6 +15,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import image1 from '../../images/rightarrow.jpg';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CommentIcon from '@mui/icons-material/Comment';
+import CommentCard from '../CommentCard/Comment';
+import Input from '../Utiles/Input';
+import { Button } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -33,12 +40,12 @@ const Travel = () => {
             <Navbar />
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader theme={theme} />
-                <Grid style={{ marginLeft: '10px' }} container spacing={3}>
+                <Grid container spacing={3}>
                     <Grid item xs={2}>
-                        <img src={image} height="70%" width="100%" />
+                        <img src={image} height="250px" width="100%" />
                     </Grid>
-                    <Grid item xs={10}>
-                        <Card sx={{ maxWidth: 600 }}>
+                    <Grid item xs={6}>
+                        <Card sx={{ maxWidth: '100%' }}>
                             <CardHeader
                                 avatar={
                                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -46,15 +53,20 @@ const Travel = () => {
                                     </Avatar>
                                 }
                                 action={
-                                    <IconButton aria-label="settings">
-                                        <MoreVertIcon />
-                                    </IconButton>
+                                    <div>
+                                        <IconButton style={{ marginRight: '10px' }} aria-label="settings">
+                                            <EditIcon />
+                                        </IconButton>
+                                        <IconButton>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </div>
                                 }
                                 title="Shrimp and Chorizo Paella"
                                 subheader="March 08, 2022"
                             />
                             <CardContent style={{ paddingTop: '0px' }} >
-                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }} >
+                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', maxWidth: '400px' }} >
                                     <Typography variant="h6" >Source </Typography>
                                     <img src={image1} width="100px" height="50px" />
                                     <Typography variant="h6" >Destination </Typography>
@@ -74,14 +86,37 @@ const Travel = () => {
                                 </div>
                             </CardContent>
                             <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
+                                <IconButton style={{ marginRight: '10px' }} aria-label="add to favorites">
                                     <FavoriteIcon />
                                 </IconButton>
                                 <IconButton aria-label="share">
-                                    <ShareIcon />
+                                    <CommentIcon />
                                 </IconButton>
                             </CardActions>
                         </Card>
+                        <br />
+                        <Card sx={{ maxWidth: '100%' }}>
+                            <CardHeader
+                                title="Write a comment..."
+                            />
+                            <CardContent style={{ paddingTop: '0px', marginTop: '-10px' }} >
+                                <form>
+                                    <Input margin="normal" name="Title" label="Comment" autoFocus />
+                                </form>
+                            </CardContent>
+                            <CardActions style={{ marginTop: '-15px' }} disabeSpacing>
+                                <IconButton style={{ marginRight: '10px' }} aria-label="add to favorites">
+                                    <SendIcon />
+                                </IconButton>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
                     </Grid>
                 </Grid>
             </Box>
