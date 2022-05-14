@@ -3,10 +3,13 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import './Login.css';
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
+import { login } from '../../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
     const [data, SetData] = useState({ email: '', password: '' });
+    const history = useNavigate();
 
     const handleChange = (e) => {
         SetData({ ...data, [e.target.name]: e.target.value });
@@ -14,6 +17,14 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(data)
+        login(data)
+            .then((res) => {
+                localStorage.setItem('user', JSON.stringify({ ...res?.data }));
+                console.log(res);
+                history('/dashboard');
+            })
+            .catch((err) => console.log(err));
     }
 
     return (

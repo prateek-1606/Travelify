@@ -24,6 +24,7 @@ import { Button } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddTravelModel from '../AddTravelModel/AddTravelModel';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 260;
 
@@ -96,7 +97,7 @@ export default function MiniDrawer() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [openaddtravel, setaddtravel] = React.useState(false);
-
+    const navigate = useNavigate();
     //console.log(openaddtravel)
     const handleaddtravel = () => {
         console.log(openaddtravel)
@@ -114,6 +115,11 @@ export default function MiniDrawer() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const handlelogout = () => {
+        localStorage.removeItem('user')
+        navigate('/')
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -159,7 +165,7 @@ export default function MiniDrawer() {
                         <FilterAltIcon /> <Typography variant="subtitle1" style={{ marginLeft: '10px' }} >Filter Travel</Typography>
                     </IconButton>
                     <div style={{ marginLeft: 'auto', marginRight: '50px' }} >
-                        <Button color="inherit" style={{ marginRight: '30px' }} >Logout</Button>
+                        <Button color="inherit" style={{ marginRight: '30px' }} onClick={handlelogout} >Logout</Button>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
