@@ -2,9 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const userRouter = require('./routers/user')
 const cors = require('cors');
-// const blogRouter = require('./routers/blog')
-// const User = require('./db/models/user')
-// const Blog = require('./db/models/blog');
+
 const app = express()
 app.use(cors({ origin: true, credentials: true }));
 const port = process.env.PORT || 3001
