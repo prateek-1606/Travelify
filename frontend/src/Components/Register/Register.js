@@ -1,12 +1,14 @@
 import { Button } from 'react-bootstrap';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import './Register.css';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
+import { register } from '../../api/auth';
 
 const Register = () => {
 
-    const [data, SetData] = useState({ name: '', email: '', password: '', contactno: '' });
+    const [data, SetData] = useState({ name: '', email: '', password: '', contact: '' });
+    const history = useNavigate();
 
     const handleChange = (e) => {
         SetData({ ...data, [e.target.name]: e.target.value });
@@ -14,7 +16,13 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data);
+        register(data)
+            .then((res) => {
+                localStorage.setItem('user', JSON.stringify({ ...res?.data }));
+                console.log(res);
+                history('/dashboard');
+            })
+            .catch((e) => console.log(e));
     }
 
     return (
@@ -36,7 +44,7 @@ const Register = () => {
                                 </Form.Group>
                                 <Form.Group style={{ marginTop: '20px' }} >
                                     <Form.Label style={{ fontWeight: '500' }}>Contact No</Form.Label>
-                                    <Form.Control onChange={handleChange} name="contactno" type="text" placeholder="9548******" />
+                                    <Form.Control onChange={handleChange} name="contact" type="text" placeholder="9548******" />
                                 </Form.Group>
                                 <Form.Group style={{ marginTop: '20px', marginBottom: '30px' }} >
                                     <Form.Label style={{ fontWeight: '500' }}>Password</Form.Label>
