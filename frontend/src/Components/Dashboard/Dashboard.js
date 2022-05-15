@@ -21,16 +21,16 @@ const Dashboard = () => {
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader theme={theme} />
                 <Grid style={{ marginLeft: '10px' }} container spacing={2}>
-                    <Grid item xs={4}>
+                    <Grid item md={4} sm={6} xs={11} >
                         <Card />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item md={4} sm={6} xs={11} >
                         <Card />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item md={4} sm={6} xs={11} >
                         <Card />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item md={4} sm={6} xs={11} >
                         <Card />
                     </Grid>
                 </Grid>

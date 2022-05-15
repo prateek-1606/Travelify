@@ -43,6 +43,13 @@ const Travel = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={2}>
                         <img src={image} height="250px" width="100%" />
+                        {/* <Card sx={{ maxWidth: '100%' }}>
+                            <CardContent style={{ paddingTop: '0px' }} >
+                                <Typography variant="body2" color="text.secondary">
+                                    varshneyprateek20@gmail.com
+                                </Typography>
+                            </CardContent>
+                        </Card> */}
                     </Grid>
                     <Grid item xs={6}>
                         <Card sx={{ maxWidth: '100%' }}>
@@ -111,7 +118,19 @@ const Travel = () => {
                             </CardActions>
                         </Card>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} style={{ maxHeight: '90vh', overflow: 'auto' }} >
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
+                        <br />
+                        <CommentCard />
+                        <br />
                         <CommentCard />
                         <br />
                         <CommentCard />

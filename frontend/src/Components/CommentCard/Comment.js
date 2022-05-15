@@ -44,11 +44,6 @@ const Comment = () => {
                     if you like.
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
-                <IconButton style={{ marginRight: '10px' }} aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-            </CardActions>
         </Card>
     )
 }
