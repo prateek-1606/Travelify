@@ -20,14 +20,13 @@ const userSchema = new mongoose.Schema({
                 throw new Error('Email is invalid')
             }
         }
-    }
-    ,
+    },
     contact: {
         type: Number,
         required: true,
         unique: true,
-    }
-    , password: {
+    }, 
+    password: {
         type: String,
         required: true,
         minlength: 6,

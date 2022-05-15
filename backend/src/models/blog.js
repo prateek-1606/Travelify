@@ -45,10 +45,24 @@ const Blog = mongoose.model('Blog',{
             }
         }
     },
+    Likes: [
+        {
+            userid: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true
+            }
+        }
+    ],
     comment: [
         {
-            type: String,
-            trim: true
+            userid: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true
+            },
+            description: {
+                type: String, 
+                required: true
+            }
         }
     ],
     owner: {

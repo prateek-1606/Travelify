@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const userRouter = require('./routers/user')
+const blogRouter = require('./routers/blog')
 const cors = require('cors');
 
 const app = express()
@@ -17,3 +18,4 @@ mongoose.connect('mongodb+srv://Ashish_Raikwar:priya1234@cluster0.ja7nr.mongodb.
 
 app.use(express.json())
 app.use(userRouter)
+app.use(blogRouter)
