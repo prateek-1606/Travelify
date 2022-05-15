@@ -9,7 +9,7 @@ who also wanted to travel to same place with low budget.
 >This application not only reduces your expenses but also 
 gives you unforgettable experience with a new friend.
 
-Here is the solution.
+### Here is the solution.
 >Web Application that helps travellers to connect with each 
 other who are visiting to same place.
 
@@ -19,7 +19,7 @@ other who are visiting to same place.
 
 >Interested users can contact each other to proceed further.
  
- TECH STACK USED
+ ### TECH STACK USED
  
  Frontend :-  React.js | Redux | Material-UI | Bootstrap
  
