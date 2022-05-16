@@ -41,4 +41,18 @@ router.get('/blogs/:id', async(req,res) => {
     }
 })
 
+router.delete('/blogs/:id', auth, async(req,res) => {
+    try {
+        const _id = req.params.id
+        const blog = await Blog.deleteOne({_id , owner : req.user._id})
+        if(!blog){
+            return res.status(404).send()
+        }
+        
+        res.send(blog)
+    }catch (e) {
+        res.status(404).send()
+    }
+})
+
 module.exports = router
