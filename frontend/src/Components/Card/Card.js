@@ -12,8 +12,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import image from '../../images/rightarrow.jpg';
 import { Link } from 'react-router-dom'
+import CommentIcon from '@mui/icons-material/Comment';
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({ travel }) {
+    console.log(travel)
 
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -28,39 +30,39 @@ export default function RecipeReviewCard() {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title="Shrimp and Chorizo Paella"
-                subheader="March 08, 2022"
+                title={travel.title}
+                subheader={travel.date.slice(0, 10)}
             />
-            <Link to="/travel/1" style={{ textDecoration: 'none', color: 'black' }} >
+            <Link to={`../travel/${travel._id}`} style={{ textDecoration: 'none', color: 'black' }} >
                 <CardContent style={{ paddingTop: '0px' }} >
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }} >
-                        <Typography variant="h6" >Source </Typography>
+                        <Typography variant="h6" >{travel.source}</Typography>
                         <img src={image} width="100px" height="50px" />
-                        <Typography variant="h6" >Destination </Typography>
+                        <Typography variant="h6" >{travel.destination}</Typography>
                     </div>
                     <Typography variant="body2" color="text.secondary">
-                        This impressive paella is a perfect party dish and a fun meal to cook
-                        together with your guests. Add 1 cup of frozen peas along with the mussels,
-                        if you like.
+                        {travel.content}
                     </Typography>
                     <div style={{ marginTop: '10px' }} >
                         <Typography style={{ display: 'inline' }} variant="subtitle1">Expense Per Head:- </Typography>
-                        <Typography variant="body2" style={{ display: 'inline' }}> 400Rs</Typography>
+                        <Typography variant="body2" style={{ display: 'inline' }}>{travel.ExpensePerHead}</Typography>
                     </div>
                     <div style={{ marginTop: '5px' }}>
                         <Typography style={{ display: 'inline' }} variant="subtitle1">Available Seats:- </Typography>
-                        <Typography variant="body2" style={{ display: 'inline' }}> 4</Typography>
+                        <Typography variant="body2" style={{ display: 'inline' }}>{travel.AvailableSeats}</Typography>
                     </div>
                 </CardContent>
             </Link>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
+                    <Typography>{travel.Likes.length}</Typography>
                 </IconButton>
                 <IconButton aria-label="share">
-                    <ShareIcon />
+                    <CommentIcon />
+                    <Typography>{travel.comment.length}</Typography>
                 </IconButton>
             </CardActions>
-        </Card>
+        </Card >
     );
 }

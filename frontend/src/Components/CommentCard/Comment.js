@@ -13,9 +13,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import image1 from '../../images/rightarrow.jpg';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CommentIcon from '@mui/icons-material/Comment';
 
-const Comment = () => {
+const Comment = ({ comment }) => {
     return (
         <Card sx={{ maxWidth: '90%' }} style={{ marginButtom: '20px' }}>
             <CardHeader
@@ -39,9 +38,7 @@ const Comment = () => {
             />
             <CardContent style={{ paddingTop: '0px' }} >
                 <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                    {comment.content}
                 </Typography>
             </CardContent>
         </Card>

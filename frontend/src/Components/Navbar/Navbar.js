@@ -24,7 +24,7 @@ import { Button } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddTravelModel from '../AddTravelModel/AddTravelModel';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const drawerWidth = 260;
 
@@ -139,9 +139,11 @@ export default function MiniDrawer() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h5" noWrap component="div">
-                        Travelify
-                    </Typography>
+                    <Link to="/dashboard" style={{ textDecoration: 'none', color: 'white' }} >
+                        <Typography variant="h5" noWrap component="div">
+                            Travelify
+                        </Typography>
+                    </Link>
                     <IconButton
                         color="inherit"
                         aria-label="add travel"

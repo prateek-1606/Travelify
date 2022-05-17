@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { Box, Grid } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
@@ -22,6 +22,8 @@ import CommentCard from '../CommentCard/Comment';
 import Input from '../Utiles/Input';
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import { getTravel } from '../../api/travel';
+import { useParams } from 'react-router-dom';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -32,8 +34,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
-const Travel = () => {
-    const theme = useTheme();
+const Travel = (props) => {
+    const theme = useTheme()
+    const params = useParams();
+    const { id } = params;
+    const [data, setData] = useState(null);
+    useEffect(() => {
+        getTravel(id)
+            .then((res) => {
+                setData(res.data)
+            })
+            .catch((e) => console.log(e));
+    }, [])
+
+    if (data === null) return (
+        <div>Loading...</div>
+    )
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -69,35 +85,37 @@ const Travel = () => {
                                         </IconButton>
                                     </div>
                                 }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="March 08, 2022"
+                                title={data.title}
+                                subheader={data.date.slice(0, 10)}
                             />
                             <CardContent style={{ paddingTop: '0px' }} >
                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', maxWidth: '400px' }} >
-                                    <Typography variant="h6" >Source </Typography>
+                                    <Typography variant="h6" >{data.source}</Typography>
                                     <img src={image1} width="100px" height="50px" />
-                                    <Typography variant="h6" >Destination </Typography>
+                                    <Typography variant="h6" >{data.destination}</Typography>
                                 </div>
                                 <Typography variant="body2" color="text.secondary">
-                                    This impressive paella is a perfect party dish and a fun meal to cook
-                                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                                    if you like.
+                                    {data.content}
                                 </Typography>
                                 <div style={{ marginTop: '10px' }} >
                                     <Typography style={{ display: 'inline' }} variant="subtitle1">Expense Per Head:- </Typography>
-                                    <Typography variant="body2" style={{ display: 'inline' }}> 400Rs</Typography>
+                                    <Typography variant="body2" style={{ display: 'inline' }}>{data.ExpensePerHead}</Typography>
                                 </div>
                                 <div style={{ marginTop: '5px' }}>
                                     <Typography style={{ display: 'inline' }} variant="subtitle1">Available Seats:- </Typography>
-                                    <Typography variant="body2" style={{ display: 'inline' }}> 4</Typography>
+                                    <Typography variant="body2" style={{ display: 'inline' }}>{data.AvailableSeats}</Typography>
                                 </div>
                             </CardContent>
                             <CardActions disableSpacing>
                                 <IconButton style={{ marginRight: '10px' }} aria-label="add to favorites">
                                     <FavoriteIcon />
+                                    <Typography>{data.Likes.length}</Typography>
+
                                 </IconButton>
                                 <IconButton aria-label="share">
                                     <CommentIcon />
+                                    <Typography>{data.comment.length}</Typography>
+
                                 </IconButton>
                             </CardActions>
                         </Card>
@@ -119,23 +137,14 @@ const Travel = () => {
                         </Card>
                     </Grid>
                     <Grid item xs={4} style={{ maxHeight: '90vh', overflow: 'auto' }} >
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
-                        <br />
-                        <CommentCard />
+                        {data.comment.map((c) => {
+                            return (
+                                <div>
+                                    <CommentCard comment={c} />
+                                    <br />
+                                </div>
+                            )
+                        })}
                     </Grid>
                 </Grid>
             </Box>
