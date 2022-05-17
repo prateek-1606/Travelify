@@ -31,7 +31,7 @@ export default function RecipeReviewCard({ travel }) {
                     </IconButton>
                 }
                 title={travel.title}
-                subheader={travel.date.slice(0, 10)}
+                subheader={travel.createdAt !== undefined ? travel.createdAt.slice(0, 10) : travel.date.slice(0, 10)}
             />
             <Link to={`../travel/${travel._id}`} style={{ textDecoration: 'none', color: 'black' }} >
                 <CardContent style={{ paddingTop: '0px' }} >

@@ -11,7 +11,7 @@ const Input = ({ name, handleChange, label, half, autoFocus, type, handleShowPas
             margin={margin}
             onChange={handleChange}
             variant="outlined"
-            required
+            required="true"
             fullWidth
             label={label}
             autoFocus={autoFocus}

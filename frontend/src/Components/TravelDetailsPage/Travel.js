@@ -86,7 +86,7 @@ const Travel = (props) => {
                                     </div>
                                 }
                                 title={data.title}
-                                subheader={data.date.slice(0, 10)}
+                                subheader={data.createdAt !== undefined ? data.createdAt.slice(0, 10) : data.date.slice(0, 10)}
                             />
                             <CardContent style={{ paddingTop: '0px' }} >
                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', maxWidth: '400px' }} >

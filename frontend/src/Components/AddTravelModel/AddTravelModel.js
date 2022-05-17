@@ -1,76 +1,36 @@
-import { Dialog, MenuItem, DialogTitle, DialogContent, FormControl, InputLabel, Select, DialogActions, Button } from '@mui/material';
+import { Dialog, MenuItem, Grid, DialogTitle, DialogContent, FormControl, InputLabel, Select, DialogActions, Button } from '@mui/material';
 import React, { useState } from 'react';
 import useStyles from './styles';
 import Input from '../Utiles/Input';
+import { postTravel } from '../../api/travel';
 
 const AddTask = ({ isOpen, setIsOpen }) => {
 
     const classes = useStyles();
-    const [data, setData] = useState({});
+    const [data, setData] = useState(null);
 
     const handleSubmit = () => {
-
+        const user = JSON.parse(localStorage.getItem('user'));
+        setData({ ...data, owner: user.user._id });
+        postTravel(data).then((res) => {
+            console.log(res);
+            setIsOpen(false);
+        })
+            .catch((e) => console.log(e));
     }
 
     return (
         <Dialog open={isOpen} onClose={!isOpen} >
             <DialogTitle className={classes.dialog} >Create New Travel</DialogTitle>
             <DialogContent >
-                <Input margin="normal" name="Title" label="Title" handleChange={(e) => setData({ ...data, title: e.target.value })} autoFocus half />
-                {/* <FormControl className={classes.formControl} >
-                    <InputLabel id="status" >Status</InputLabel>
-                    <Select
-                        labelId="status"
-                        id="status"
-                        value={data.status}
-                        onChange={(e) => setData({ ...data, status: e.target.value })}
-                    >
-                        <MenuItem value="Open">Open</MenuItem>
-                        <MenuItem value="On Progress">On Progress</MenuItem>
-                        <MenuItem value="Pending" >Pending</MenuItem>
-                        <MenuItem value="Completed">Completed</MenuItem>
-                    </Select>
-                </FormControl> */}
-                {/* <FormControl className={classes.formControl} >
-                    <InputLabel id="priority" >Priority</InputLabel>
-                    <Select
-                        labelId="priority"
-                        id="priority"
-                        value={data.priority}
-                        onChange={(e) => setData({ ...data, priority: e.target.value })}
-                    >
-                        <MenuItem value="Low">Low</MenuItem>
-                        <MenuItem value="Medium">Medium</MenuItem>
-                        <MenuItem value="High">High</MenuItem>
-                        <MenuItem value="Urgent">Urgent</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                    <InputLabel id="source" >Source</InputLabel>
-                    <Select
-                        labelId="source"
-                        id="source"
-                        value={data.source}
-                        onChange={(e) => setData({ ...data, source: e.target.value })}
-                    >
-                        <MenuItem value="In-House">In-House</MenuItem>
-                        <MenuItem value="Alpha Tester">Alpha Tester</MenuItem>
-                        <MenuItem value="Beta Tester">Beta Tester</MenuItem>
-                        <MenuItem value="Client">Client</MenuItem>
-                        <MenuItem value="Support">Support</MenuItem>
-                    </Select>
-                </FormControl> */}
-                {/* <FormControl className={classes.formControl}>
-                    <InputLabel id="AssignedTo" >Assigned To</InputLabel>
-                    <Select
-                        labelId="AssignedTo"
-                        id="AssignedTo"
-                        value={data.AssignedTo}
-                        onChange={(e) => setData({ ...data, AssignedTo: e.target.value })}
-                    >
-                    </Select>
-                </FormControl> */}
-                <Input margin="normal" name="detail" label="Details" handleChange={(e) => setData({ ...data, details: e.target.value })} autoFocus half />
+                <Grid container >
+                    <Input margin="normal" name="Title" label="Title" handleChange={(e) => setData({ ...data, title: e.target.value })} autoFocus />
+                    <Input margin="normal" name="Source" label="Source" handleChange={(e) => setData({ ...data, source: e.target.value })} autoFocus half />
+                    <Input margin="normal" name="destination" label="Destination" handleChange={(e) => setData({ ...data, destination: e.target.value })} autoFocus half />
+                    <Input margin="normal" name="detail" label="Details" handleChange={(e) => setData({ ...data, content: e.target.value })} autoFocus />
+                    <Input margin="normal" name="ExpensePerHead" label="ExpensePerHead" handleChange={(e) => setData({ ...data, ExpensePerHead: e.target.value })} autoFocus half />
+                    <Input margin="normal" name="AvailableSeats" label="AvailableSeats" handleChange={(e) => setData({ ...data, AvailableSeats: e.target.value })} autoFocus half />
+                </Grid>
             </DialogContent>
             <DialogActions>
                 <Button variant="outlined" color="primary" onClick={handleSubmit} >Create</Button>

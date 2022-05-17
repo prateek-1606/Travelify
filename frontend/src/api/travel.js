@@ -13,7 +13,8 @@ export const getAllTravel = async () => {
 }
 
 export const postTravel = async ({ title, source, destination, content, ExpensePerHead, AvailableSeats }) => {
-    const token = localStorage.getItem('user').token;
+    const token = JSON.parse(localStorage.getItem('user')).token;
+    console.log(token)
     const Likes = [], comment = [];
     try {
         const res = await axios.post(`${URL}`,
