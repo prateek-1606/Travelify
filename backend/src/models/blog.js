@@ -1,36 +1,32 @@
 const mongoose = require('mongoose')
 
-const Blog = mongoose.model('Blog',{
+const Blog = mongoose.model('Blog', new mongoose.Schema({
     title: {
-        type : String,
-        required : true,
-        trim : true
-    },
-    date: {
-        type : Date,
-        required : true
+        type: String,
+        required: true,
+        trim: true
     },
     source: {
-        type : String,
-        required : true,
-        trim : true
+        type: String,
+        required: true,
+        trim: true
     },
     destination: {
-        type : String,
-        required : true,
-        trim : true
+        type: String,
+        required: true,
+        trim: true
     },
     content: {
-        type : String,
-        required : true,
-        trim : true
+        type: String,
+        required: true,
+        trim: true
     },
     ExpensePerHead: {
         type: Number,
         required: true,
         trim: true,
-        validate(value){
-            if(value<0){
+        validate(value) {
+            if (value < 0) {
                 throw new error('Expense must be non-negative')
             }
         }
@@ -39,8 +35,8 @@ const Blog = mongoose.model('Blog',{
         type: Number,
         required: true,
         trim: true,
-        validate(value){
-            if(value<0){
+        validate(value) {
+            if (value < 0) {
                 throw new error('Seats must be non-negative')
             }
         }
@@ -60,7 +56,7 @@ const Blog = mongoose.model('Blog',{
                 required: true
             },
             description: {
-                type: String, 
+                type: String,
                 required: true
             }
         }
@@ -70,6 +66,6 @@ const Blog = mongoose.model('Blog',{
         required: true,
         ref: 'User'
     }
-})
+}, { timestamps: true }))
 
 module.exports = Blog
