@@ -3,12 +3,12 @@ const Blog = require('../models/blog')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 
-router.post('/blogs', auth, async(req, res) => {
+router.post('/blogs', auth, async (req, res) => {
     const blog = new Blog({
         ...req.body,
-        owner:req.user._id
+        owner: req.user._id
     })
-    try{
+    try {
         await blog.save()
         res.status(200).send(blog)
     } catch (e) {
@@ -16,7 +16,7 @@ router.post('/blogs', auth, async(req, res) => {
     }
 })
 
-router.get('/blogs', async(req,res) => {
+router.get('/blogs', async (req, res) => {
     try {
         const blogs = await Blog.find({})
         res.send(blogs)
@@ -26,12 +26,12 @@ router.get('/blogs', async(req,res) => {
     }
 })
 
-router.get('/blogs/:id', async(req,res) => {
+router.get('/blogs/:id', async (req, res) => {
     const _id = req.params.id
 
     try {
-        const blog = await Blog.findOne({_id})
-        if(!blog){
+        const blog = await Blog.findOne({ _id })
+        if (!blog) {
             return res.status(404).send()
         }
 
@@ -41,16 +41,16 @@ router.get('/blogs/:id', async(req,res) => {
     }
 })
 
-router.delete('/blogs/:id', auth, async(req,res) => {
+router.delete('/blogs/:id', auth, async (req, res) => {
     try {
         const _id = req.params.id
-        const blog = await Blog.deleteOne({_id , owner : req.user._id})
-        if(!blog){
+        const blog = await Blog.deleteOne({ _id, owner: req.user._id })
+        if (!blog) {
             return res.status(404).send()
         }
-        
+
         res.send(blog)
-    }catch (e) {
+    } catch (e) {
         res.status(404).send()
     }
 })

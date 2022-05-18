@@ -15,6 +15,7 @@ const AddTask = ({ isOpen, setIsOpen }) => {
         postTravel(data).then((res) => {
             console.log(res);
             setIsOpen(false);
+            window.location.reload(false)
         })
             .catch((e) => console.log(e));
     }
