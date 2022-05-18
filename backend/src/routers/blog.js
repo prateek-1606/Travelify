@@ -80,4 +80,20 @@ router.patch('/blogs/:id', auth, async(req,res) => {
     }
 })
 
+router.post('/blogs/addLike/:id' , auth, async(req , res) => {
+    try {
+        const blog = await Blog.findOne({_id:req.params.id})
+        if(!blog){
+            return res.status(404).send({error: 'Invalid id!'})
+        }
+
+        blog.Likes = blog.Likes.concat({userid:req.user._id})
+
+        await blog.save()
+        res.send(blog)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 module.exports = router

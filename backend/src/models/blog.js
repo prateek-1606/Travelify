@@ -49,7 +49,7 @@ const Blog = mongoose.model('Blog', new mongoose.Schema({
             }
         }
     ],
-    comment: [
+    comments: [
         {
             userid: {
                 type: mongoose.Schema.Types.ObjectId,
