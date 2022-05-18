@@ -55,4 +55,29 @@ router.delete('/blogs/:id', auth, async (req, res) => {
     }
 })
 
+router.patch('/blogs/:id', auth, async(req,res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['title','source','destination','content','ExpensePerHead','AvailableSeats']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if(!isValidOperation){
+        return res.status(404).send({error:'Invalid updates!'})
+    }
+
+    const _id = req.params.id
+    try {
+        const blog = await Blog.findOne({_id , owner:req.user._id})
+        
+        if(!blog){
+            return res.status(404).send()
+        }
+
+        updates.forEach((update) => blog[update] = req.body[update])
+        await blog.save()
+        res.send(blog)
+    }catch (e) {
+        res.status(400).send(e.message)
+    }
+})
+
 module.exports = router
