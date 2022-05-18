@@ -80,7 +80,7 @@ router.patch('/blogs/:id', auth, async(req,res) => {
     }
 })
 
-router.post('/blogs/addLike/:id' , auth, async(req , res) => {
+router.patch('/blogs/addLike/:id' , auth, async(req , res) => {
     try {
         const blog = await Blog.findOne({_id:req.params.id})
         if(!blog){
@@ -93,6 +93,22 @@ router.post('/blogs/addLike/:id' , auth, async(req , res) => {
         res.send(blog)
     } catch (e) {
         res.status(500).send(e)
+    }
+})
+
+router.patch('/blogs/addcomment/:id' , auth , async(req, res) => {
+    try {
+        const blog = await Blog.findOne({_id:req.params.id})
+        if(!blog){
+            return res.status(404).send({error: 'Invalid id!'})
+        }
+
+        blog.comments = blog.comments.concat({userid:req.user._id , description:req.body[Object.keys(req.body)]})
+
+        await blog.save()
+        res.send(blog)
+    } catch (e) {
+        res.status(500).send()
     }
 })
 
