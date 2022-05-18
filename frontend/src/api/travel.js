@@ -38,3 +38,15 @@ export const getTravel = async (id) => {
         throw error;
     }
 }
+
+export const deleteTravel = async (id) => {
+    try {
+        const token = JSON.parse(localStorage.getItem('user')).token;
+        const res = await axios.delete(`${URL}/${id}`, { headers: { "Authorization": `Bearer ${token}` } })
+        console.log(res);
+        return res;
+    }
+    catch (e) {
+        throw e;
+    }
+}
