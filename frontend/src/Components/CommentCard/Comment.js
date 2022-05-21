@@ -38,7 +38,7 @@ const Comment = ({ comment }) => {
             />
             <CardContent style={{ paddingTop: '0px' }} >
                 <Typography variant="body2" color="text.secondary">
-                    {comment.content}
+                    {comment.description}
                 </Typography>
             </CardContent>
         </Card>

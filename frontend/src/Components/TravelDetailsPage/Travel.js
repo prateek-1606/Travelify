@@ -22,7 +22,7 @@ import CommentCard from '../CommentCard/Comment';
 import Input from '../Utiles/Input';
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { getTravel, deleteTravel } from '../../api/travel';
+import { getTravel, deleteTravel, addcomment } from '../../api/travel';
 import { useNavigate, useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -56,6 +56,20 @@ const Travel = (props) => {
             navigator('/dashboard');
         })
             .catch((e) => console.log(e))
+    }
+
+    const [description, setDescription] = useState('');
+    const addComment = () => {
+        console.log(description)
+        addcomment(data._id, description)
+            .then(() => {
+                window.location.reload()
+            })
+            .catch((e) => console.log(e))
+    }
+
+    const handlechange = (e) => {
+        setDescription(e.target.value)
     }
 
     return (
@@ -126,7 +140,7 @@ const Travel = (props) => {
                                     </IconButton>
                                     <IconButton aria-label="share">
                                         <CommentIcon />
-                                        <Typography>{data.comment.length}</Typography>
+                                        <Typography>{data.comments.length}</Typography>
 
                                     </IconButton>
                                 </CardActions>
@@ -138,18 +152,18 @@ const Travel = (props) => {
                                 />
                                 <CardContent style={{ paddingTop: '0px', marginTop: '-10px' }} >
                                     <form>
-                                        <Input margin="normal" name="Title" label="Comment" autoFocus />
+                                        <Input margin="normal" name="comment" label="Comment" autoFocus handleChange={handlechange} />
                                     </form>
                                 </CardContent>
                                 <CardActions style={{ marginTop: '-15px' }} disabeSpacing>
-                                    <IconButton style={{ marginRight: '10px' }} aria-label="add to favorites">
+                                    <IconButton onClick={addComment} style={{ marginRight: '10px' }} aria-label="add to favorites">
                                         <SendIcon />
                                     </IconButton>
                                 </CardActions>
                             </Card>
                         </Grid>
                         <Grid item xs={4} style={{ maxHeight: '90vh', overflow: 'auto' }} >
-                            {data.comment.map((c) => {
+                            {data.comments.map((c) => {
                                 return (
                                     <div>
                                         <CommentCard comment={c} />

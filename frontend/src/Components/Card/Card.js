@@ -13,9 +13,17 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import image from '../../images/rightarrow.jpg';
 import { Link } from 'react-router-dom'
 import CommentIcon from '@mui/icons-material/Comment';
+import { addlike } from '../../api/travel';
 
 export default function RecipeReviewCard({ travel }) {
     console.log(travel)
+    const handlelike = () => {
+        addlike(travel._id)
+            .then(() => {
+                window.location.reload()
+            })
+            .catch((e) => console.log(e))
+    }
 
     return (
         <Card sx={{ maxWidth: 345 }}>
@@ -54,13 +62,13 @@ export default function RecipeReviewCard({ travel }) {
                 </CardContent>
             </Link>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton onClick={handlelike} aria-label="add to favorites">
                     <FavoriteIcon />
                     <Typography>{travel.Likes.length}</Typography>
                 </IconButton>
                 <IconButton aria-label="share">
                     <CommentIcon />
-                    <Typography>{travel.comment.length}</Typography>
+                    <Typography>{travel.comments.length}</Typography>
                 </IconButton>
             </CardActions>
         </Card >

@@ -66,8 +66,8 @@ const Blog = mongoose.model('Blog', new mongoose.Schema({
         required: true,
         ref: 'User'
     }
-}, 
-{ timestamps: true }
+},
+    { timestamps: true }
 ))
 
 module.exports = Blog

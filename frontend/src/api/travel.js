@@ -50,3 +50,29 @@ export const deleteTravel = async (id) => {
         throw e;
     }
 }
+
+export const addlike = async (id) => {
+    try {
+        console.log(id)
+        const token = JSON.parse(localStorage.getItem('user')).token;
+        const res = await axios.patch(`${URL}/addLike/${id}`, {}, { headers: { "Authorization": `Bearer ${token}` } })
+        console.log(res);
+        return res;
+    }
+    catch (e) {
+        throw e;
+    }
+}
+
+export const addcomment = async (id, description) => {
+    try {
+        console.log(description)
+        const token = JSON.parse(localStorage.getItem('user')).token;
+        const res = await axios.patch(`${URL}/addcomment/${id}`, { description }, { headers: { "Authorization": `Bearer ${token}` } })
+        console.log(res);
+        return res;
+    }
+    catch (e) {
+        throw e;
+    }
+}

@@ -55,39 +55,39 @@ router.delete('/blogs/:id', auth, async (req, res) => {
     }
 })
 
-router.patch('/blogs/:id', auth, async(req,res) => {
+router.patch('/blogs/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['title','source','destination','content','ExpensePerHead','AvailableSeats']
+    const allowedUpdates = ['title', 'source', 'destination', 'content', 'ExpensePerHead', 'AvailableSeats']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-    if(!isValidOperation){
-        return res.status(404).send({error:'Invalid updates!'})
+    if (!isValidOperation) {
+        return res.status(404).send({ error: 'Invalid updates!' })
     }
 
     const _id = req.params.id
     try {
-        const blog = await Blog.findOne({_id , owner:req.user._id})
-        
-        if(!blog){
+        const blog = await Blog.findOne({ _id, owner: req.user._id })
+
+        if (!blog) {
             return res.status(404).send()
         }
 
         updates.forEach((update) => blog[update] = req.body[update])
         await blog.save()
         res.send(blog)
-    }catch (e) {
+    } catch (e) {
         res.status(400).send(e.message)
     }
 })
 
-router.patch('/blogs/addLike/:id' , auth, async(req , res) => {
+router.patch('/blogs/addLike/:id', auth, async (req, res) => {
     try {
-        const blog = await Blog.findOne({_id:req.params.id})
-        if(!blog){
-            return res.status(404).send({error: 'Invalid id!'})
+        const blog = await Blog.findOne({ _id: req.params.id })
+        if (!blog) {
+            return res.status(404).send({ error: 'Invalid id!' })
         }
 
-        blog.Likes = blog.Likes.concat({userid:req.user._id})
+        blog.Likes = blog.Likes.concat({ userid: req.user._id })
 
         await blog.save()
         res.send(blog)
@@ -96,14 +96,15 @@ router.patch('/blogs/addLike/:id' , auth, async(req , res) => {
     }
 })
 
-router.patch('/blogs/addcomment/:id' , auth , async(req, res) => {
+router.patch('/blogs/addcomment/:id', auth, async (req, res) => {
     try {
-        const blog = await Blog.findOne({_id:req.params.id})
-        if(!blog){
-            return res.status(404).send({error: 'Invalid id!'})
+        console.log(req.body)
+        const blog = await Blog.findOne({ _id: req.params.id })
+        if (!blog) {
+            return res.status(404).send({ error: 'Invalid id!' })
         }
 
-        blog.comments = blog.comments.concat({userid:req.user._id , description:req.body[Object.keys(req.body)]})
+        blog.comments = blog.comments.concat({ userid: req.user._id, description: req.body[Object.keys(req.body)] })
 
         await blog.save()
         res.send(blog)
