@@ -2,17 +2,16 @@ import { Dialog, MenuItem, Grid, DialogTitle, DialogContent, FormControl, InputL
 import React, { useState } from 'react';
 import useStyles from './styles';
 import Input from '../Utiles/Input';
-import { postTravel } from '../../api/travel';
+import { editTravel } from '../../api/travel';
 
-const AddTask = ({ isOpen, setIsOpen }) => {
+const EditTravel = ({ id, isOpen, setIsOpen }) => {
 
     const classes = useStyles();
     const [data, setData] = useState(null);
 
     const handleSubmit = () => {
-        const user = JSON.parse(localStorage.getItem('user'));
         setData(data);
-        postTravel(data).then((res) => {
+        editTravel(id, data).then((res) => {
             console.log(res);
             setIsOpen(false);
             window.location.reload(false)
@@ -22,7 +21,7 @@ const AddTask = ({ isOpen, setIsOpen }) => {
 
     return (
         <Dialog open={isOpen} onClose={!isOpen} >
-            <DialogTitle className={classes.dialog} >Create New Travel</DialogTitle>
+            <DialogTitle className={classes.dialog} >Edit Travel</DialogTitle>
             <DialogContent >
                 <Grid container >
                     <Input margin="normal" name="Title" label="Title" handleChange={(e) => setData({ ...data, title: e.target.value })} autoFocus />
@@ -34,7 +33,7 @@ const AddTask = ({ isOpen, setIsOpen }) => {
                 </Grid>
             </DialogContent>
             <DialogActions>
-                <Button variant="outlined" color="primary" onClick={handleSubmit} >Create</Button>
+                <Button variant="outlined" color="primary" onClick={handleSubmit} >Edit</Button>
                 <Button variant="outlined" color="secondary" onClick={() => setIsOpen(false)}>
                     Close
                 </Button>
@@ -43,4 +42,4 @@ const AddTask = ({ isOpen, setIsOpen }) => {
     )
 }
 
-export default AddTask;
+export default EditTravel;

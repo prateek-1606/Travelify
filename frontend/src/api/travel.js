@@ -76,3 +76,17 @@ export const addcomment = async (id, description) => {
         throw e;
     }
 }
+
+export const editTravel = async (id, { title, source, destination, content, ExpensePerHead, AvailableSeats }) => {
+    const token = JSON.parse(localStorage.getItem('user')).token;
+    try {
+        const res = await axios.patch(`${URL}/${id}`,
+            { title, source, destination, content, ExpensePerHead, AvailableSeats }
+            , { headers: { "Authorization": `Bearer ${token}` } })
+        console.log(res);
+        return res;
+    }
+    catch (error) {
+        throw error;
+    }
+}

@@ -22,9 +22,10 @@ import CommentCard from '../CommentCard/Comment';
 import Input from '../Utiles/Input';
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { getTravel, deleteTravel, addcomment } from '../../api/travel';
+import { getTravel, deleteTravel, addcomment, addlike } from '../../api/travel';
 import { useNavigate, useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import EditTravel from '../EditTravelModel/EditTravel';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -42,6 +43,7 @@ const Travel = (props) => {
     const { id } = params;
     const [data, setData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user')).user;
+    const [open, setOpen] = useState(false);
     useEffect(() => {
         getTravel(id)
             .then((res) => {
@@ -68,6 +70,18 @@ const Travel = (props) => {
             .catch((e) => console.log(e))
     }
 
+    const handleditravel = () => {
+        setOpen(true);
+    }
+
+    const handlelike = () => {
+        addlike(data._id)
+            .then(() => {
+                window.location.reload()
+            })
+            .catch((e) => console.log(e))
+    }
+
     const handlechange = (e) => {
         setDescription(e.target.value)
     }
@@ -75,6 +89,7 @@ const Travel = (props) => {
     return (
         <Box sx={{ display: 'flex' }}>
             <Navbar />
+            {open && <EditTravel isOpen={open} setIsOpen={setOpen} id={data._id} />}
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader theme={theme} />
                 {data === null ? (
@@ -102,7 +117,7 @@ const Travel = (props) => {
                                     action={
                                         user._id === data.owner && (
                                             < div >
-                                                <IconButton style={{ marginRight: '10px' }} aria-label="settings">
+                                                <IconButton onClick={handleditravel} style={{ marginRight: '10px' }} aria-label="settings">
                                                     <EditIcon />
                                                 </IconButton>
                                                 <IconButton onClick={handleDelete} >
@@ -133,7 +148,7 @@ const Travel = (props) => {
                                     </div>
                                 </CardContent>
                                 <CardActions disableSpacing>
-                                    <IconButton style={{ marginRight: '10px' }} aria-label="add to favorites">
+                                    <IconButton onClick={handlelike} style={{ marginRight: '10px' }} aria-label="add to favorites">
                                         <FavoriteIcon />
                                         <Typography>{data.Likes.length}</Typography>
 
