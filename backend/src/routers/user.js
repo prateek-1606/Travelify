@@ -34,6 +34,18 @@ router.post('/users/logout', auth, async (req, res) => {
         res.status(500).send();
     }
 });
+router.get('/users/:id',async(req,res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        if(!user){
+            throw new Error();
+        }
+        res.send(user);
+        
+    } catch (e){
+        res.status(404).send();
+    }
+})
 
 module.exports = router
 
