@@ -2,13 +2,15 @@ const express = require('express')
 const mongoose = require('mongoose');
 const userRouter = require('./routers/user')
 const blogRouter = require('./routers/blog')
+const env = require('dotenv')
 const cors = require('cors');
 
+env.config();
 const app = express()
 app.use(cors({ origin: true, credentials: true }));
 const port = process.env.PORT || 3001
 
-mongoose.connect('mongodb+srv://Ashish_Raikwar:priya1234@cluster0.ja7nr.mongodb.net/Travelify?retryWrites=true&w=majority').then(() => {
+mongoose.connect(process.env.mongodb).then(() => {
     return app.listen({ port })
 })
     .then(() => {
