@@ -58,6 +58,10 @@ const Blog = mongoose.model('Blog', new mongoose.Schema({
             description: {
                 type: String,
                 required: true
+            },
+            date:{
+                type: Date,
+                required: true
             }
         }
     ],
