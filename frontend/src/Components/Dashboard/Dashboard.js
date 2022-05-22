@@ -36,7 +36,7 @@ const Dashboard = () => {
                 {data === null ? (
                     <CircularProgress />
                 ) : (
-                    <Grid style={{ marginLeft: '10px' }} container spacing={2}>
+                    <Grid style={{ marginLeft: '10px' }} container spacing={2} >
                         {data.map((travel) => {
                             return (
                                 <Grid key={travel._id} item md={4} sm={6} xs={11} >

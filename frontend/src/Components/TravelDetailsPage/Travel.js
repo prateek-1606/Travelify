@@ -26,6 +26,9 @@ import { getTravel, deleteTravel, addcomment, addlike } from '../../api/travel';
 import { useNavigate, useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import EditTravel from '../EditTravelModel/EditTravel';
+import { CardActionArea, CardMedia } from '@mui/material';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -96,17 +99,37 @@ const Travel = (props) => {
                     <CircularProgress />
                 ) : (
                     <Grid container spacing={3}>
-                        <Grid item xs={2}>
-                            <img src={image} height="250px" width="100%" />
-                            {/* <Card sx={{ maxWidth: '100%' }}>
-                            <CardContent style={{ paddingTop: '0px' }} >
-                                <Typography variant="body2" color="text.secondary">
-                                    varshneyprateek20@gmail.com
-                                </Typography>
-                            </CardContent>
-                        </Card> */}
+                        <Grid item xs={3}>
+                            <Card sx={{ maxWidth: 300 }}>
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        height="200"
+                                        style={{ width: '100%' }}
+                                        image={image}
+                                        alt="green iguana"
+                                    />
+                                    <CardContent >
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            Prateek Varshney
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            <div >
+                                                <EmailIcon style={{ display: "inline" }} fontSize="small" />
+                                                <Typography style={{ display: "inline", marginLeft: '10px' }} >varshneyprateek20@gmail.com</Typography>
+                                            </div>
+                                        </Typography>
+                                        <Typography style={{ marginTop: '15px', marginBottom: '10px' }} variant="body2" color="text.secondary">
+                                            <div >
+                                                <PhoneIcon style={{ display: "inline" }} fontSize="small" />
+                                                <Typography style={{ display: "inline", marginLeft: '10px' }} >9548467461</Typography>
+                                            </div>
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={5}>
                             <Card sx={{ maxWidth: '100%' }}>
                                 <CardHeader
                                     avatar={
@@ -190,7 +213,7 @@ const Travel = (props) => {
                     </Grid>
                 )}
             </Box>
-        </Box>
+        </Box >
     )
 }
 

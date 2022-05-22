@@ -26,17 +26,12 @@ export default function RecipeReviewCard({ travel }) {
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 400 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                         PV
                     </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
                 }
                 title={travel.title}
                 subheader={travel.createdAt !== undefined ? travel.createdAt.slice(0, 10) : travel.date.slice(0, 10)}
