@@ -31,3 +31,14 @@ export const register = async ({ email, password, name, contact }) => {
         throw error;
     }
 }
+
+export const getuser = async (id) => {
+    try {
+        const res = await axios.get(`${URL}/${id}`)
+        console.log(res);
+        return res;
+    }
+    catch (error) {
+        throw error;
+    }
+}

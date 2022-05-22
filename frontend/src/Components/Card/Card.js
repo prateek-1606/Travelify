@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -14,9 +14,11 @@ import image from '../../images/rightarrow.jpg';
 import { Link } from 'react-router-dom'
 import CommentIcon from '@mui/icons-material/Comment';
 import { addlike } from '../../api/travel';
+import { getuser } from '../../api/auth';
 
-export default function RecipeReviewCard({ travel }) {
+export default function TravelCard({ travel }) {
     console.log(travel)
+    const [CreatorData, setCreatorData] = useState(null);
     const handlelike = () => {
         addlike(travel._id)
             .then(() => {
@@ -25,12 +27,27 @@ export default function RecipeReviewCard({ travel }) {
             .catch((e) => console.log(e))
     }
 
+    useState(() => {
+        getuser(travel.owner)
+            .then((res) => {
+                setCreatorData(res.data)
+            })
+            .catch((e) => console.log(e))
+    }, [])
+
+    if (CreatorData == null) {
+        return (
+            <div>
+
+            </div>
+        )
+    }
     return (
         <Card sx={{ maxWidth: 400 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        PV
+                        {CreatorData.name[0].toUpperCase()}
                     </Avatar>
                 }
                 title={travel.title}

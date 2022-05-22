@@ -29,6 +29,7 @@ import EditTravel from '../EditTravelModel/EditTravel';
 import { CardActionArea, CardMedia } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
+import { getuser } from '../../api/auth';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -47,10 +48,20 @@ const Travel = (props) => {
     const [data, setData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user')).user;
     const [open, setOpen] = useState(false);
+    const [CreatorData, setCreatorData] = useState(null);
+
     useEffect(() => {
+
         getTravel(id)
             .then((res) => {
                 setData(res.data)
+                getuser(res.data.owner)
+                    .then((res) => {
+                        setCreatorData(res.data);
+                    })
+                    .catch((Err) => {
+                        console.log(Err);
+                    })
             })
             .catch((e) => console.log(e));
     }, [])
@@ -95,7 +106,7 @@ const Travel = (props) => {
             {open && <EditTravel isOpen={open} setIsOpen={setOpen} id={data._id} />}
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader theme={theme} />
-                {data === null ? (
+                {data === null || CreatorData === null ? (
                     <CircularProgress />
                 ) : (
                     <Grid container spacing={3}>
@@ -111,18 +122,18 @@ const Travel = (props) => {
                                     />
                                     <CardContent >
                                         <Typography gutterBottom variant="h5" component="div">
-                                            Prateek Varshney
+                                            {CreatorData.name}
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
                                             <div >
                                                 <EmailIcon style={{ display: "inline" }} fontSize="small" />
-                                                <Typography style={{ display: "inline", marginLeft: '10px' }} >varshneyprateek20@gmail.com</Typography>
+                                                <Typography style={{ display: "inline", marginLeft: '10px' }} >{CreatorData.email}</Typography>
                                             </div>
                                         </Typography>
                                         <Typography style={{ marginTop: '15px', marginBottom: '10px' }} variant="body2" color="text.secondary">
                                             <div >
                                                 <PhoneIcon style={{ display: "inline" }} fontSize="small" />
-                                                <Typography style={{ display: "inline", marginLeft: '10px' }} >9548467461</Typography>
+                                                <Typography style={{ display: "inline", marginLeft: '10px' }} >{CreatorData.contact}</Typography>
                                             </div>
                                         </Typography>
                                     </CardContent>
@@ -134,7 +145,7 @@ const Travel = (props) => {
                                 <CardHeader
                                     avatar={
                                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                            PV
+                                            {CreatorData.name[0].toUpperCase()}
                                         </Avatar>
                                     }
                                     action={
