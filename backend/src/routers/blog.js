@@ -87,7 +87,15 @@ router.patch('/blogs/addLike/:id', auth, async (req, res) => {
             return res.status(404).send({ error: 'Invalid id!' })
         }
 
-        blog.Likes = blog.Likes.concat({ userid: req.user._id })
+        const userid = req.user._id
+        const alreadyliked = blog.Likes.filter((user) => user.userid.toString() === userid.toString())
+
+        if (!alreadyliked.length) {
+            blog.Likes = blog.Likes.concat({userid})
+        }
+        else{
+            blog.Likes = blog.Likes.filter((user) => user.userid.toString() !== userid.toString())
+        }
 
         await blog.save()
         res.send(blog)
