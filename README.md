@@ -25,7 +25,7 @@ other who are visiting to same place.
  
  Backend :- Node.js | Express.js | JWT 
  
- Database :- MySQL 
+ Database :- MongoDb 
  
  Version Control :- Git | GitHub 
  
