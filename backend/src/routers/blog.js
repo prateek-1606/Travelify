@@ -120,4 +120,29 @@ router.patch('/blogs/addcomment/:id', auth, async (req, res) => {
     }
 })
 
+router.delete('/blogs/deletecomment/:blogid/:commentid', auth, async (req, res) => {
+    try {
+        const _blogid = req.params.blogid
+        const _commentid = req.params.commentid
+        const blog = await Blog.findOne({ _id : _blogid})
+        if (!blog) {
+            return res.status(404).send()
+        }
+
+        blog.comments = blog.comments.filter((comment) => {
+            if (comment.userid.toString() === req.user._id.toString() && comment._id.toString() ===  _commentid) {
+                return false
+            }
+            else {
+                return true
+            }
+        })
+
+        await blog.save()
+        res.send(blog)
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
 module.exports = router
