@@ -215,7 +215,7 @@ const Travel = (props) => {
                             {data.comments.map((c) => {
                                 return (
                                     <div>
-                                        <CommentCard comment={c} />
+                                        <CommentCard blogid={data._id} comment={c} />
                                         <br />
                                     </div>
                                 )

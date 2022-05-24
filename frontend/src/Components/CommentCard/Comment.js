@@ -14,10 +14,12 @@ import image1 from '../../images/rightarrow.jpg';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { getuser } from '../../api/auth';
+import { deletecomment } from '../../api/travel';
 
-const Comment = ({ comment }) => {
+const Comment = ({ blogid, comment }) => {
 
     const [CreatorData, setCreatorData] = useState(null);
+    const user = JSON.parse(localStorage.getItem('user')).user._id;
 
     useEffect(() => {
         getuser(comment.userid)
@@ -35,6 +37,15 @@ const Comment = ({ comment }) => {
         )
     }
 
+    const handledelete = () => {
+        deletecomment(blogid, comment._id)
+            .then((res) => {
+                console.log(res);
+                window.location.reload()
+            })
+            .catch((e) => console.log(e))
+    }
+
     return (
         <Card sx={{ maxWidth: '90%' }} style={{ marginButtom: '20px' }}>
             <CardHeader
@@ -44,14 +55,18 @@ const Comment = ({ comment }) => {
                     </Avatar>
                 }
                 action={
-                    <div>
-                        <IconButton style={{ marginRight: '10px' }} aria-label="settings">
-                            <EditIcon />
-                        </IconButton>
-                        <IconButton>
-                            <DeleteIcon />
-                        </IconButton>
-                    </div>
+                    comment.userid === user ? (
+                        <div>
+                            <IconButton style={{ marginRight: '10px' }} aria-label="settings">
+                                <EditIcon />
+                            </IconButton>
+                            <IconButton onClick={handledelete} >
+                                <DeleteIcon />
+                            </IconButton>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )
                 }
                 title={CreatorData.name}
                 subheader="March 08, 2022"

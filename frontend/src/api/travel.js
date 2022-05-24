@@ -90,3 +90,15 @@ export const editTravel = async (id, { title, source, destination, content, Expe
         throw error;
     }
 }
+
+export const deletecomment = async (blogid, commentid) => {
+    try {
+        const token = JSON.parse(localStorage.getItem('user')).token;
+        const res = await axios.delete(`${URL}/deletecomment/${blogid}/${commentid}`, { headers: { "Authorization": `Bearer ${token}` } })
+        console.log(res);
+        return res;
+    }
+    catch (e) {
+        throw e;
+    }
+}
