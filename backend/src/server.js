@@ -18,6 +18,10 @@ mongoose.connect(process.env.mongodb).then(() => {
     })
     .catch(e => console.log(e))
 
+app.get('/', (req, res) => {
+    res.send('Heloo Browsrere')
+})
+
 app.use(express.json())
 app.use(userRouter)
 app.use(blogRouter)
