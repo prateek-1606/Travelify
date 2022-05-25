@@ -14,7 +14,7 @@ mongoose.connect(process.env.mongodb).then(() => {
     return app.listen({ port })
 })
     .then(() => {
-        console.log('server is connected');
+        console.log('Server is up on port '+ port);
     })
     .catch(e => console.log(e))
 
