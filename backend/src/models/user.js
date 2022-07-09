@@ -24,8 +24,7 @@ const userSchema = new mongoose.Schema({
     contact: {
         type: Number,
         required: true,
-        unique: true,
-    }, 
+    },
     password: {
         type: String,
         required: true,
@@ -96,7 +95,7 @@ userSchema.pre('save', async function (next) {
 
 userSchema.pre('remove', async function (next) {
     const user = this;
-    await Blog.deleteMany({owner: user._id});
+    await Blog.deleteMany({ owner: user._id });
     next();
 });
 
