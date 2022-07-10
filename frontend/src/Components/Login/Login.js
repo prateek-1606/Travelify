@@ -25,7 +25,6 @@ const Login = () => {
     const handleSubmit = (e) => {
         setLoading(true);
         e.preventDefault();
-        console.log(data)
         login(data)
             .then((res) => {
                 setLoading(false);

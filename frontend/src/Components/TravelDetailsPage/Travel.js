@@ -49,12 +49,18 @@ const Travel = (props) => {
     const user = JSON.parse(localStorage.getItem('user')).user;
     const [open, setOpen] = useState(false);
     const [CreatorData, setCreatorData] = useState(null);
+    const [LikesCount, SetLikesCount] = useState(0);
+    const [CommentCount, SetCommentCount] = useState(0);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
 
         getTravel(id)
             .then((res) => {
                 setData(res.data)
+                SetLikesCount(res.data.Likes.length);
+                SetCommentCount(res.data.comments.length);
+                setComments(res.data.comments);
                 getuser(res.data.owner)
                     .then((res) => {
                         setCreatorData(res.data);
@@ -78,8 +84,10 @@ const Travel = (props) => {
     const addComment = () => {
         console.log(description)
         addcomment(data._id, description)
-            .then(() => {
-                window.location.reload()
+            .then((res) => {
+                setComments(res.data.comments)
+                SetCommentCount(res.data.comments.length);
+                //window.location.reload()
             })
             .catch((e) => console.log(e))
     }
@@ -90,8 +98,10 @@ const Travel = (props) => {
 
     const handlelike = () => {
         addlike(data._id)
-            .then(() => {
-                window.location.reload()
+            .then((res) => {
+                console.log(res);
+                SetLikesCount(res.data.Likes.length);
+                //window.location.reload()
             })
             .catch((e) => console.log(e))
     }
@@ -184,12 +194,12 @@ const Travel = (props) => {
                                 <CardActions disableSpacing>
                                     <IconButton onClick={handlelike} style={{ marginRight: '10px' }} aria-label="add to favorites">
                                         <FavoriteIcon />
-                                        <Typography>{data.Likes.length}</Typography>
+                                        <Typography>{LikesCount}</Typography>
 
                                     </IconButton>
                                     <IconButton aria-label="share">
                                         <CommentIcon />
-                                        <Typography>{data.comments.length}</Typography>
+                                        <Typography>{CommentCount}</Typography>
 
                                     </IconButton>
                                 </CardActions>
@@ -212,10 +222,10 @@ const Travel = (props) => {
                             </Card>
                         </Grid>
                         <Grid item xs={4} style={{ maxHeight: '90vh', overflow: 'auto' }} >
-                            {data.comments.map((c) => {
+                            {comments.map((c) => {
                                 return (
                                     <div>
-                                        <CommentCard blogid={data._id} comment={c} />
+                                        <CommentCard blogid={data._id} comment={c} setComments={setComments} />
                                         <br />
                                     </div>
                                 )

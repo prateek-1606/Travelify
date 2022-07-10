@@ -1,8 +1,7 @@
 import axios from 'axios';
-const URL = 'http://localhost:3001/users'
+const URL = 'https://travelifybackend.herokuapp.com/users'
 
 export const login = async ({ email, password }) => {
-    console.log(email, password)
     try {
         const res = await axios.post(`${URL}/login`, {
             email,

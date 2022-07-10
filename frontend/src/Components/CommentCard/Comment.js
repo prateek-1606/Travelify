@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { getuser } from '../../api/auth';
 import { deletecomment } from '../../api/travel';
 
-const Comment = ({ blogid, comment }) => {
+const Comment = ({ blogid, comment, setComments }) => {
 
     const [CreatorData, setCreatorData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user')).user._id;
@@ -40,8 +40,7 @@ const Comment = ({ blogid, comment }) => {
     const handledelete = () => {
         deletecomment(blogid, comment._id)
             .then((res) => {
-                console.log(res);
-                window.location.reload()
+                setComments(res.data.comments);
             })
             .catch((e) => console.log(e))
     }

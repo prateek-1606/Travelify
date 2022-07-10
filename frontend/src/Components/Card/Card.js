@@ -17,12 +17,12 @@ import { addlike } from '../../api/travel';
 import { getuser } from '../../api/auth';
 
 export default function TravelCard({ travel }) {
-    console.log(travel)
     const [CreatorData, setCreatorData] = useState(null);
+    const [likescount, setLikesCount] = useState(travel.Likes.length);
     const handlelike = () => {
         addlike(travel._id)
-            .then(() => {
-                window.location.reload()
+            .then((res) => {
+                setLikesCount(res.data.Likes.length);
             })
             .catch((e) => console.log(e))
     }
@@ -76,7 +76,7 @@ export default function TravelCard({ travel }) {
             <CardActions disableSpacing>
                 <IconButton onClick={handlelike} aria-label="add to favorites">
                     <FavoriteIcon />
-                    <Typography>{travel.Likes.length}</Typography>
+                    <Typography>{likescount}</Typography>
                 </IconButton>
                 <IconButton aria-label="share">
                     <CommentIcon />
