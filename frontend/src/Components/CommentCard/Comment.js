@@ -68,7 +68,7 @@ const Comment = ({ blogid, comment, setComments }) => {
                     )
                 }
                 title={CreatorData.name}
-                subheader="March 08, 2022"
+                subheader={comment.createdAt !== undefined ? comment.createdAt.slice(0, 10) : comment.date.slice(0, 10)}
             />
             <CardContent style={{ paddingTop: '0px' }} >
                 <Typography variant="body2" color="text.secondary">

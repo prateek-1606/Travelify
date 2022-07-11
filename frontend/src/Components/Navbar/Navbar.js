@@ -24,6 +24,7 @@ import { Button } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddTravelModel from '../AddTravelModel/AddTravelModel';
+import FilterTravelModel from '../FilterTravelModel/FilterTravelModel';
 import { useNavigate, Link } from 'react-router-dom';
 
 const drawerWidth = 260;
@@ -93,10 +94,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ data, setData }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [openaddtravel, setaddtravel] = React.useState(false);
+    const [OpenFilterTravel, setFilterTravel] = React.useState(false);
     const navigate = useNavigate();
     //console.log(openaddtravel)
     const handleaddtravel = () => {
@@ -105,7 +107,7 @@ export default function MiniDrawer() {
     }
 
     const handlefiltertravel = () => {
-
+        setFilterTravel(true);
     }
 
     const handleDrawerOpen = () => {
@@ -124,6 +126,7 @@ export default function MiniDrawer() {
     return (
         <Box sx={{ display: 'flex' }}>
             <AddTravelModel isOpen={openaddtravel} setIsOpen={setaddtravel} />
+            <FilterTravelModel isOpen={OpenFilterTravel} setIsOpen={setFilterTravel} data={data} setData={setData} />
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
@@ -188,7 +191,7 @@ export default function MiniDrawer() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Travellers Post', 'Travelling Experiences'].map((text, index) => (
+                    {['Travellers Post'].map((text, index) => (
                         <ListItemButton
                             key={text}
                             sx={{

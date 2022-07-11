@@ -29,7 +29,7 @@ const Dashboard = () => {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <Navbar />
+            <Navbar data={data} setData={setData} />
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader theme={theme} />
                 {data === null ? (

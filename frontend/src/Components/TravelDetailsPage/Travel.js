@@ -47,6 +47,7 @@ const Travel = (props) => {
     const { id } = params;
     const [data, setData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user')).user;
+    const [IsLiked, SetIsLiked] = useState(false);
     const [open, setOpen] = useState(false);
     const [CreatorData, setCreatorData] = useState(null);
     const [LikesCount, SetLikesCount] = useState(0);
@@ -57,6 +58,8 @@ const Travel = (props) => {
 
         getTravel(id)
             .then((res) => {
+                const liked = res.data.Likes.filter((like) => like.userid === user._id);
+                SetIsLiked(liked.length !== 0 ? true : false);
                 setData(res.data)
                 SetLikesCount(res.data.Likes.length);
                 SetCommentCount(res.data.comments.length);
@@ -101,6 +104,8 @@ const Travel = (props) => {
             .then((res) => {
                 console.log(res);
                 SetLikesCount(res.data.Likes.length);
+                const liked = res.data.Likes.filter((like) => like.userid === user._id);
+                SetIsLiked(liked.length !== 0 ? true : false);
                 //window.location.reload()
             })
             .catch((e) => console.log(e))
@@ -113,7 +118,7 @@ const Travel = (props) => {
     return (
         <Box sx={{ display: 'flex' }}>
             <Navbar />
-            {open && <EditTravel isOpen={open} setIsOpen={setOpen} id={data._id} />}
+            {open && <EditTravel Traveldata={data} isOpen={open} setIsOpen={setOpen} id={data._id} />}
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader theme={theme} />
                 {data === null || CreatorData === null ? (
@@ -193,7 +198,7 @@ const Travel = (props) => {
                                 </CardContent>
                                 <CardActions disableSpacing>
                                     <IconButton onClick={handlelike} style={{ marginRight: '10px' }} aria-label="add to favorites">
-                                        <FavoriteIcon />
+                                        <FavoriteIcon color={IsLiked ? 'error' : 'inherit'} />
                                         <Typography>{LikesCount}</Typography>
 
                                     </IconButton>

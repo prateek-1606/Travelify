@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -19,15 +19,20 @@ import { getuser } from '../../api/auth';
 export default function TravelCard({ travel }) {
     const [CreatorData, setCreatorData] = useState(null);
     const [likescount, setLikesCount] = useState(travel.Likes.length);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const liked = travel.Likes.filter((like) => like.userid === user.user._id);
+    const [IsLiked, SetIsLiked] = useState(liked.length !== 0 ? true : false);
     const handlelike = () => {
         addlike(travel._id)
             .then((res) => {
                 setLikesCount(res.data.Likes.length);
+                const liked = res.data.Likes.filter((like) => like.userid === user.user._id);
+                SetIsLiked(liked.length !== 0 ? true : false);
             })
             .catch((e) => console.log(e))
     }
 
-    useState(() => {
+    useEffect(() => {
         getuser(travel.owner)
             .then((res) => {
                 setCreatorData(res.data)
@@ -75,7 +80,7 @@ export default function TravelCard({ travel }) {
             </Link>
             <CardActions disableSpacing>
                 <IconButton onClick={handlelike} aria-label="add to favorites">
-                    <FavoriteIcon />
+                    <FavoriteIcon color={IsLiked ? 'error' : 'inherit'} />
                     <Typography>{likescount}</Typography>
                 </IconButton>
                 <IconButton aria-label="share">
