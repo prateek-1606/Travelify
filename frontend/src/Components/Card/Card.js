@@ -62,7 +62,7 @@ export default function TravelCard({ travel }) {
                 <CardContent style={{ paddingTop: '0px' }} >
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }} >
                         <Typography variant="h6" >{travel.source}</Typography>
-                        <img src={image} width="100px" height="50px" />
+                        <img src={image} width="40%" height="50px" />
                         <Typography variant="h6" >{travel.destination}</Typography>
                     </div>
                     <Typography variant="body2" color="text.secondary">

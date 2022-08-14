@@ -1,6 +1,7 @@
 .crow {
-    height:100vh;
+    height: 100vh;
 }
+
 .register-form-block {
     width: 50%;
     margin-left: auto;
@@ -8,15 +9,18 @@
     margin-top: 10%;
     margin-bottom: auto;
 }
-  
+
 .custom-btn {
     background: rgb(216, 75, 216) !important;
 }
+
 .title {
     color: blueviolet;
     font-family: playfair;
     font-weight: 700;
 }
-.column-2 {
+
+.column-1 {
     /* background: rgb(163, 85, 236) !important; */
+    /* background-color: blueviolet; */
 }

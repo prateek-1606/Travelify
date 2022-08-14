@@ -62,7 +62,13 @@ const Login = () => {
             </Snackbar>
             <Container fluid>
                 <Row className="crow" >
-                    <Col>
+                    <Col lg={5} className="column-1">
+                        <div style={{ marginLeft: "10%" }} >
+                            <h1 style={{ fontFamily: 'Playfair', color: 'white', textAlign: 'center', fontSize: '44px' }} >Travelify</h1>
+                            <p style={{ fontFamily: 'serif', color: 'white', textAlign: 'center', fontSize: '28px' }} >Find your right travelling partner</p>
+                        </div>
+                    </Col>
+                    <Col lg={7} >
                         <div className="border-dark login-form-block" >
                             {loading ? (
                                 <CircularProgress />
@@ -96,12 +102,6 @@ const Login = () => {
                                     </div>
                                 </Form>
                             )}
-                        </div>
-                    </Col>
-                    <Col className="column-2" >
-                        <div style={{ marginLeft: "10%" }} >
-                            <h1 style={{ fontFamily: 'Playfair', color: 'white', textAlign: 'center', fontSize: '44px' }} >Travelify</h1>
-                            <p style={{ fontFamily: 'serif', color: 'white', textAlign: 'center', fontSize: '28px' }} >Find your right travelling partner</p>
                         </div>
                     </Col>
                 </Row>
