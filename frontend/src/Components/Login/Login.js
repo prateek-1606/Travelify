@@ -53,6 +53,27 @@ const Login = () => {
         }
     }
 
+    const handleGuestLogin = () => {
+        setLoading(true);
+        login({ email: 'test@gmail.com', password: 'test12' })
+            .then((res) => {
+                setLoading(false);
+                localStorage.setItem('user', JSON.stringify({ ...res?.data }));
+                console.log(res);
+                history('/dashboard');
+            })
+            .catch((err) => {
+                setLoading(false);
+                setOpen(true);
+                if (err.response && err.response.data) {
+                    setError(err.response.data);
+                }
+                else {
+                    setError(err.message);
+                }
+            });
+    }
+
     return (
         <>
             <Snackbar open={open} autoHideDuration={4000} onClose={() => setOpen(false)}>
@@ -63,7 +84,7 @@ const Login = () => {
             <Container fluid>
                 <Row className="crow" >
                     <Col lg={5} className="column-1">
-                        <div style={{ marginLeft: "10%" }} >
+                        <div style={{ textAlign: 'center' }} >
                             <h1 style={{ fontFamily: 'Playfair', color: 'white', textAlign: 'center', fontSize: '44px' }} >Travelify</h1>
                             <p style={{ fontFamily: 'serif', color: 'white', textAlign: 'center', fontSize: '28px' }} >Find your right travelling partner</p>
                         </div>
@@ -96,9 +117,15 @@ const Login = () => {
                                     <div className="d-grid">
                                         <Button type="submit" className="custom-btn" >Signin</Button>
                                     </div>
-                                    <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                        <text>Don't have an account?</text>
-                                        <Link to="/register" >Register</Link>
+                                    <div style={{ marginTop: '20px' }} >
+                                        <div style={{ display: 'flex', justifyContent: 'space-between' }} >
+                                            <text >Don't have an account?</text>
+                                            <Link to="/register" >Register</Link>
+                                        </div>
+                                        <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'space-between' }} >
+                                            <text>Login as guest?</text>
+                                            <text style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleGuestLogin} >Guest Login</text>
+                                        </div>
                                     </div>
                                 </Form>
                             )}

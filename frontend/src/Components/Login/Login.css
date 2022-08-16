@@ -10,6 +10,12 @@
     margin-bottom: auto;
 }
 
+@media(max-width:600px) {
+    .login-form-block {
+        width: 70%;
+    }
+}
+
 .custom-btn {
     background: rgb(216, 75, 216) !important;
 }

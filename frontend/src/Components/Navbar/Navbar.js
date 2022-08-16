@@ -8,6 +8,8 @@ import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -26,6 +28,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddTravelModel from '../AddTravelModel/AddTravelModel';
 import FilterTravelModel from '../FilterTravelModel/FilterTravelModel';
 import { useNavigate, Link } from 'react-router-dom';
+import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 
 const drawerWidth = 260;
 
@@ -99,6 +102,7 @@ export default function MiniDrawer({ data, setData }) {
     const [open, setOpen] = React.useState(false);
     const [openaddtravel, setaddtravel] = React.useState(false);
     const [OpenFilterTravel, setFilterTravel] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate();
     //console.log(openaddtravel)
     const handleaddtravel = () => {
@@ -119,9 +123,18 @@ export default function MiniDrawer({ data, setData }) {
     };
 
     const handlelogout = () => {
+        setAnchorEl(null)
         localStorage.removeItem('user')
         navigate('/')
     }
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -147,39 +160,35 @@ export default function MiniDrawer({ data, setData }) {
                             Travelify
                         </Typography>
                     </Link>
-                    <IconButton
-                        color="inherit"
-                        aria-label="add travel"
-                        onClick={handleaddtravel}
-                        edge="start"
-                        sx={{
-                            marginLeft: 5,
-                        }}
-                    >
-                        <AddCircleOutlineIcon /> <Typography variant="subtitle1" style={{ marginLeft: '10px' }} >Add Travel</Typography>
-                    </IconButton>
-                    <IconButton
-                        color="inherit"
-                        aria-label="add travel"
-                        onClick={handlefiltertravel}
-                        edge="start"
-                        sx={{
-                            marginLeft: 4,
-                        }}
-                    >
-                        <FilterAltIcon /> <Typography variant="subtitle1" style={{ marginLeft: '10px' }} >Filter Travel</Typography>
-                    </IconButton>
-                    <div style={{ marginLeft: 'auto', marginRight: '50px' }} >
-                        <Button color="inherit" style={{ marginRight: '30px' }} onClick={handlelogout} >Logout</Button>
+                    <div style={{ marginLeft: 'auto', marginRight: '2%' }} >
+                        {/* <Button color="inherit" style={{ marginRight: '30px' }} onClick={handlelogout} >Logout</Button> */}
                         <IconButton
-                            size="large"
+                            size="larger"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
+                            onClick={handleMenu}
                             color="inherit"
                         >
                             <AccountCircle />
                         </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handlelogout}>Logout</MenuItem>
+                        </Menu>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -191,30 +200,69 @@ export default function MiniDrawer({ data, setData }) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Travellers Post'].map((text, index) => (
-                        <ListItemButton
-                            key={text}
+                    <ListItemButton
+                        key={'Travellers Post'}
+                        sx={{
+                            minHeight: 50,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                        }}
+                        onClick={() => navigate('/')}
+                    >
+                        <ListItemIcon
                             sx={{
-                                minHeight: 50,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
                             }}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {index % 2 === 0 ? <img height="25px" width="25px" src={image} /> : <img height="25px" width="25px" src={image} />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-                    ))}
+                            <img height="25px" width="25px" src={image} />
+                        </ListItemIcon>
+                        <ListItemText primary={'Travellers Post'} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                    <ListItemButton
+                        key={'Add Travel'}
+                        sx={{
+                            minHeight: 50,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                        }}
+                        onClick={handleaddtravel}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <AddCircleOutline />
+                        </ListItemIcon>
+                        <ListItemText primary={'Add Travel'} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                    <ListItemButton
+                        key={'Filter Travels'}
+                        sx={{
+                            minHeight: 50,
+                            justifyContent: open ? 'initial' : 'center',
+                            px: 2.5,
+                        }}
+                        onClick={handlefiltertravel}
+                    >
+                        <ListItemIcon
+                            sx={{
+                                minWidth: 0,
+                                mr: open ? 3 : 'auto',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <FilterAltIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={'Filter Travels'} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
                 </List>
                 <Divider />
             </Drawer>
-        </Box>
+        </Box >
     );
 }

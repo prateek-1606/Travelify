@@ -62,7 +62,7 @@ const Register = () => {
             <Container fluid>
                 <Row className="crow" >
                     <Col lg={5} className="column-1">
-                        <div style={{ marginLeft: "10%" }} >
+                        <div style={{ textAlign: 'center' }} >
                             <h1 style={{ fontFamily: 'Playfair', color: 'white', textAlign: 'center', fontSize: '44px' }} >Travelify</h1>
                             <p style={{ fontFamily: 'serif', color: 'white', textAlign: 'center', fontSize: '28px' }} >Find your right travelling partner</p>
                         </div>
