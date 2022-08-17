@@ -46,7 +46,7 @@ const Comment = ({ blogid, comment, setComments }) => {
     }
 
     return (
-        <Card sx={{ maxWidth: '90%' }} style={{ marginButtom: '20px' }}>
+        <Card sx={{ maxWidth: '99%' }} style={{ marginButtom: '20px' }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -56,7 +56,7 @@ const Comment = ({ blogid, comment, setComments }) => {
                 action={
                     comment.userid === user ? (
                         <div>
-                            <IconButton style={{ marginRight: '10px' }} aria-label="settings">
+                            <IconButton aria-label="settings">
                                 <EditIcon />
                             </IconButton>
                             <IconButton onClick={handledelete} >

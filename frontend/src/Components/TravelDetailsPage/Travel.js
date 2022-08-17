@@ -125,7 +125,7 @@ const Travel = (props) => {
                     <CircularProgress />
                 ) : (
                     <Grid container spacing={3}>
-                        <Grid item xs={3}>
+                        <Grid item md={3} sm={5} xs={12}>
                             <Card sx={{ maxWidth: 300 }}>
                                 <CardActionArea>
                                     <CardMedia
@@ -155,7 +155,7 @@ const Travel = (props) => {
                                 </CardActionArea>
                             </Card>
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item md={5} sm={7} xs={12}>
                             <Card sx={{ maxWidth: '100%' }}>
                                 <CardHeader
                                     avatar={
@@ -226,7 +226,14 @@ const Travel = (props) => {
                                 </CardActions>
                             </Card>
                         </Grid>
-                        <Grid item xs={4} style={{ maxHeight: '90vh', overflow: 'auto' }} >
+                        {
+                            window.innerWidth > 600 && window.innerWidth < 900 && (
+                                <div style={{ minWidth: '41.67%' }} >
+
+                                </div>
+                            )
+                        }
+                        <Grid item md={4} sm={6} xs={12} style={{ maxHeight: '90vh', overflow: 'auto' }} >
                             {comments.map((c) => {
                                 return (
                                     <div>
