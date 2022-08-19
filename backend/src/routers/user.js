@@ -10,10 +10,12 @@ router.post('/users', async (req, res) => {
     }
     try {
         const user = new User(req.body)
+        user.username = user.email.split('@')[0];
         await user.save()
         const token = await user.generateAuthToken()
         res.status(201).send({ user, token })
     } catch (e) {
+        console.log(e)
         res.status(400).send()
     }
 })
@@ -28,6 +30,7 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken()
         res.send({ user, token })
     } catch (e) {
+        console.log(e);
         res.status(400).send()
     }
 })
@@ -41,6 +44,18 @@ router.post('/users/logout', auth, async (req, res) => {
         res.status(500).send();
     }
 });
+router.get('/username/:username', async (req, res) => {
+    try {
+        const user = await User.findOne({ 'username': req.params.username });
+        if (!user) {
+            throw new Error();
+        }
+        res.send(user);
+
+    } catch (e) {
+        res.status(404).send();
+    }
+})
 router.get('/users/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
