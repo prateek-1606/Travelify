@@ -42,3 +42,13 @@ export const getuser = async (id) => {
         throw error;
     }
 }
+
+export const getUserByUsername = async (username) => {
+    try {
+        const res = await axios.get(`https://travelifybackend.herokuapp.com/username/${username}`)
+        return res;
+    }
+    catch (error) {
+        throw error;
+    }
+}

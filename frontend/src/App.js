@@ -6,6 +6,7 @@ import Register from './Components/Register/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Travel from './Components/TravelDetailsPage/Travel';
 import Home from './Components/Home/Home';
+import ProfilePage from './Components/ProfilePage/Profile';
 
 {/* <Routes>
     <Route path="/home" element={<Home/>} />
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/travel/:id" element={<Travel />} />
+          <Route exact path='/profile/:username' element={<ProfilePage />} />
         </Routes>
       </Router>
     </div>
