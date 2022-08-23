@@ -91,9 +91,9 @@ router.patch('/blogs/addLike/:id', auth, async (req, res) => {
         const alreadyliked = blog.Likes.filter((user) => user.userid.toString() === userid.toString())
 
         if (!alreadyliked.length) {
-            blog.Likes = blog.Likes.concat({userid})
+            blog.Likes = blog.Likes.concat({ userid })
         }
-        else{
+        else {
             blog.Likes = blog.Likes.filter((user) => user.userid.toString() !== userid.toString())
         }
 
@@ -111,7 +111,7 @@ router.patch('/blogs/addcomment/:id', auth, async (req, res) => {
             return res.status(404).send({ error: 'Invalid id!' })
         }
 
-        blog.comments = blog.comments.concat({ userid: req.user._id, description: req.body[Object.keys(req.body)], date:new Date() })
+        blog.comments = blog.comments.concat({ userid: req.user._id, description: req.body[Object.keys(req.body)], date: new Date() })
 
         await blog.save()
         res.send(blog)
@@ -124,13 +124,13 @@ router.delete('/blogs/deletecomment/:blogid/:commentid', auth, async (req, res) 
     try {
         const _blogid = req.params.blogid
         const _commentid = req.params.commentid
-        const blog = await Blog.findOne({ _id : _blogid})
+        const blog = await Blog.findOne({ _id: _blogid })
         if (!blog) {
             return res.status(404).send()
         }
 
         blog.comments = blog.comments.filter((comment) => {
-            if (comment.userid.toString() === req.user._id.toString() && comment._id.toString() ===  _commentid) {
+            if (comment.userid.toString() === req.user._id.toString() && comment._id.toString() === _commentid) {
                 return false
             }
             else {
@@ -142,6 +142,17 @@ router.delete('/blogs/deletecomment/:blogid/:commentid', auth, async (req, res) 
         res.send(blog)
     } catch (e) {
         res.status(404).send()
+    }
+})
+
+router.get('/blogs/user/:id', async (req, res) => {
+    try {
+        const userid = req.params.id;
+        const blogs = await Blog.find({ owner: userid });
+        res.send(blogs);
+    }
+    catch (e) {
+        res.status(404).send(e.message);
     }
 })
 
