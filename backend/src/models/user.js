@@ -43,6 +43,36 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    image: {
+        type: String,
+        trim: true
+    },
+    bio: {
+        type: String,
+        trim: true,
+        maxlength: 50,
+        lowercase: true
+    },
+    address: {
+        type: String,
+        trim: true,
+        lowercase: true
+    },
+    insta: {
+        type: String,
+        trim: true,
+        lowercase: true
+    },
+    facebook: {
+        type: String,
+        trim: true,
+        lowercase: true
+    },
+    twitter: {
+        type: String,
+        trim: true,
+        lowercase: true
+    },
     tokens: [
         {
             token: {
