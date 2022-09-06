@@ -1,9 +1,9 @@
 import axios from 'axios';
-const URL = 'https://travelifybackend.herokuapp.com/users'
+const URL = 'http://localhost:3001'
 
 export const login = async ({ email, password }) => {
     try {
-        const res = await axios.post(`${URL}/login`, {
+        const res = await axios.post(`${URL}/users/login`, {
             email,
             password
         })
@@ -18,7 +18,7 @@ export const login = async ({ email, password }) => {
 
 export const register = async ({ email, password, name, contact }) => {
     try {
-        const res = await axios.post(`${URL}`, {
+        const res = await axios.post(`${URL}/users`, {
             email,
             name,
             password,
@@ -34,7 +34,7 @@ export const register = async ({ email, password, name, contact }) => {
 
 export const getuser = async (id) => {
     try {
-        const res = await axios.get(`${URL}/${id}`)
+        const res = await axios.get(`${URL}/users/${id}`)
         console.log(res);
         return res;
     }
@@ -45,10 +45,23 @@ export const getuser = async (id) => {
 
 export const getUserByUsername = async (username) => {
     try {
-        const res = await axios.get(`https://travelifybackend.herokuapp.com/username/${username}`)
+        const res = await axios.get(`${URL}/username/${username}`)
         return res;
     }
     catch (error) {
         throw error;
+    }
+}
+
+export const editProfile = async (id, data) => {
+    const token = JSON.parse(localStorage.getItem('user')).token;
+    try {
+        const res = await axios.patch(`${URL}/users/${id}`, data, {
+            headers: { "Authorization": `Bearer ${token}` }
+        })
+        return res;
+    }
+    catch (err) {
+        throw err;
     }
 }

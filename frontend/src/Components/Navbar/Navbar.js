@@ -98,6 +98,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({ data, setData }) {
+    const username = JSON.parse(localStorage.getItem('user')).user.username;
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [openaddtravel, setaddtravel] = React.useState(false);
@@ -187,6 +188,7 @@ export default function MiniDrawer({ data, setData }) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
+                            <MenuItem onClick={() => window.location.href = `http://localhost:3000/profile/${username}`}>My Profile</MenuItem>
                             <MenuItem onClick={handlelogout}>Logout</MenuItem>
                         </Menu>
                     </div>

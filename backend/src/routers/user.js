@@ -79,7 +79,7 @@ router.get('/users/:id', async (req, res) => {
     }
 })
 
-router.patch('/users/:id', async (req, res) => {
+router.patch('/users/:id', auth, async (req, res) => {
     try {
         const userid = req.params.id;
         const data = req.body;
@@ -97,7 +97,7 @@ router.patch('/users/:id', async (req, res) => {
         res.send(user);
     }
     catch (e) {
-        res.send(404).send(e.message);
+        res.status(404).send(e.message);
     }
 })
 

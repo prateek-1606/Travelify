@@ -51,7 +51,7 @@ export default function TravelCard({ travel }) {
         <Card sx={{ maxWidth: 400 }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `http://localhost:3000/profile/${CreatorData.username}`} >
                         {CreatorData.name[0].toUpperCase()}
                     </Avatar>
                 }

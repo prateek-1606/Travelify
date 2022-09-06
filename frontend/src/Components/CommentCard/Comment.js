@@ -49,16 +49,13 @@ const Comment = ({ blogid, comment, setComments }) => {
         <Card sx={{ maxWidth: '99%' }} style={{ marginButtom: '20px' }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `http://localhost:3000/profile/${CreatorData.username}`} >
                         {CreatorData.name[0].toUpperCase()}
                     </Avatar>
                 }
                 action={
                     comment.userid === user ? (
                         <div>
-                            <IconButton aria-label="settings">
-                                <EditIcon />
-                            </IconButton>
                             <IconButton onClick={handledelete} >
                                 <DeleteIcon />
                             </IconButton>

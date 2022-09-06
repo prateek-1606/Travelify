@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'https://travelifybackend.herokuapp.com/blogs'
+const URL = 'http://localhost:3001/blogs'
 
 export const getAllTravel = async () => {
     try {
@@ -96,6 +96,16 @@ export const deletecomment = async (blogid, commentid) => {
         const token = JSON.parse(localStorage.getItem('user')).token;
         const res = await axios.delete(`${URL}/deletecomment/${blogid}/${commentid}`, { headers: { "Authorization": `Bearer ${token}` } })
         console.log(res);
+        return res;
+    }
+    catch (e) {
+        throw e;
+    }
+}
+
+export const getTravelByUser = async (id) => {
+    try {
+        const res = await axios.get(`${URL}/user/${id}`);
         return res;
     }
     catch (e) {
