@@ -3,6 +3,16 @@ const User = require('../models/user')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.send(users);
+    }
+    catch (e) {
+        res.status(404).send(e.message);
+    }
+})
+
 router.post('/users', async (req, res) => {
     const user = await User.findOne({ email: req.body.email })
     if (user) {
@@ -66,6 +76,28 @@ router.get('/users/:id', async (req, res) => {
 
     } catch (e) {
         res.status(404).send();
+    }
+})
+
+router.patch('/users/:id', auth, async (req, res) => {
+    try {
+        const userid = req.params.id;
+        const data = req.body;
+        const user = await User.findById(userid);
+        if (!user) {
+            return res.status(404).send()
+        }
+        const fields = ['name', 'contact', 'image', 'bio', 'address', 'insta', 'facebook', 'twitter'];
+        for (let i = 0; i < fields.length; i++) {
+            if (data[fields[i]]) {
+                user[fields[i]] = data[fields[i]];
+            }
+        }
+        await user.save()
+        res.send(user);
+    }
+    catch (e) {
+        res.status(404).send(e.message);
     }
 })
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { Box, Grid } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-import image from '../../images/profile1.jpg';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -126,16 +125,16 @@ const Travel = (props) => {
                 ) : (
                     <Grid container spacing={3}>
                         <Grid item md={3} sm={5} xs={12}>
-                            <Card sx={{ maxWidth: 300 }}>
+                            <Card sx={{ maxWidth: 300 }} style={{ cursor: 'pointer' }} onClick={() => window.location.href = `${window.location.origin}/profile/${CreatorData.username}`} >
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
-                                        height="200"
+                                        height="300"
                                         style={{ width: '100%' }}
-                                        image={image}
+                                        image={CreatorData.image}
                                         alt="green iguana"
                                     />
-                                    <CardContent >
+                                    <CardContent  >
                                         <Typography gutterBottom variant="h5" component="div">
                                             {CreatorData.name}
                                         </Typography>
@@ -159,7 +158,7 @@ const Travel = (props) => {
                             <Card sx={{ maxWidth: '100%' }}>
                                 <CardHeader
                                     avatar={
-                                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `${window.location.origin}/profile/${CreatorData.username}`} >
                                             {CreatorData.name[0].toUpperCase()}
                                         </Avatar>
                                     }

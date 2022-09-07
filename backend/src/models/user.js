@@ -43,6 +43,32 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    image: {
+        type: String,
+        trim: true,
+        default: 'https://sm.askmen.com/askmen_in/article/f/facebook-p/facebook-profile-picture-affects-chances-of-gettin_gstt.jpg'
+    },
+    bio: {
+        type: String,
+        trim: true,
+        maxlength: 50,
+    },
+    address: {
+        type: String,
+        trim: true,
+    },
+    insta: {
+        type: String,
+        trim: true,
+    },
+    facebook: {
+        type: String,
+        trim: true,
+    },
+    twitter: {
+        type: String,
+        trim: true,
+    },
     tokens: [
         {
             token: {

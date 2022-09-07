@@ -102,3 +102,13 @@ export const deletecomment = async (blogid, commentid) => {
         throw e;
     }
 }
+
+export const getTravelByUser = async (id) => {
+    try {
+        const res = await axios.get(`${URL}/user/${id}`);
+        return res;
+    }
+    catch (e) {
+        throw e;
+    }
+}
