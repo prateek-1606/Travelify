@@ -37,23 +37,24 @@ const Profile = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        getTravelByUser(user)
-            .then((res) => {
-                setTravelData(res.data);
-            })
-            .catch((e) => console.log(e));
-    }, [])
-
-    useEffect(() => {
         getUserByUsername(username)
             .then((res) => {
-                console.log(res.data);
                 setUserData(res.data);
             })
             .catch((e) => {
                 console.log(e);
             })
     }, [])
+
+    useEffect(() => {
+        if (userData) {
+            getTravelByUser(userData._id)
+                .then((res) => {
+                    setTravelData(res.data);
+                })
+                .catch((e) => console.log(e));
+        }
+    }, [userData])
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -64,7 +65,7 @@ const Profile = () => {
                 {userData === null ? (
                     <CircularProgress />
                 ) : (
-                    <Grid container>
+                    <Grid container >
                         <Card sx={{ width: '100%', height: "260px", padding: "40px", display: "flex" }}>
                             <CardMedia
                                 component="img"
@@ -117,13 +118,15 @@ const Profile = () => {
                                 </div>
                             )}
                         </Card>
-                        {travelData.map((travel) => {
-                            return (
-                                <Grid style={{ marginTop: '20px' }} key={travel._id} item md={4} sm={6} xs={12}>
-                                    <TravelCard travel={travel} />
-                                </Grid>
-                            )
-                        })}
+                        <Grid container spacing={2} >
+                            {travelData != null && travelData.map((travel) => {
+                                return (
+                                    <Grid style={{ marginTop: '20px' }} key={travel._id} item md={4} sm={6} xs={12}>
+                                        <TravelCard travel={travel} />
+                                    </Grid>
+                                )
+                            })}
+                        </Grid>
                     </Grid>
                 )}
             </Box>

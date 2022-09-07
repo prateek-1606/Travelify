@@ -14,6 +14,7 @@ const EditProfile = ({ id, isOpen, setIsOpen }) => {
 
     const handleSubmit = () => {
         setData(data);
+        setIsOpen(false);
         if (file !== null) {
             const formdata = new FormData();
             formdata.append("file", file[0])
@@ -25,7 +26,6 @@ const EditProfile = ({ id, isOpen, setIsOpen }) => {
                     editProfile(id, data)
                         .then((response) => {
                             console.log(response);
-                            setIsOpen(false);
                             window.location.reload(false);
                         })
                         .catch((e) => console.log(e));
@@ -35,7 +35,6 @@ const EditProfile = ({ id, isOpen, setIsOpen }) => {
             editProfile(id, data)
                 .then((res) => {
                     console.log(res);
-                    setIsOpen(false);
                     window.location.reload(false);
                 })
                 .catch((e) => console.log(e));

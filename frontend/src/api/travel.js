@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://localhost:3001/blogs'
+const URL = 'https://travelifybackend.herokuapp.com/blogs'
 
 export const getAllTravel = async () => {
     try {
