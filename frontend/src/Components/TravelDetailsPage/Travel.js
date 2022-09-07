@@ -125,7 +125,7 @@ const Travel = (props) => {
                 ) : (
                     <Grid container spacing={3}>
                         <Grid item md={3} sm={5} xs={12}>
-                            <Card sx={{ maxWidth: 300 }} style={{ cursor: 'pointer' }} onClick={() => window.location.href = `http://localhost:3000/profile/${CreatorData.username}`} >
+                            <Card sx={{ maxWidth: 300 }} style={{ cursor: 'pointer' }} onClick={() => window.location.href = `${window.location.origin}/profile/${CreatorData.username}`} >
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
@@ -158,7 +158,7 @@ const Travel = (props) => {
                             <Card sx={{ maxWidth: '100%' }}>
                                 <CardHeader
                                     avatar={
-                                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `http://localhost:3000/profile/${CreatorData.username}`} >
+                                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `${window.location.origin}/profile/${CreatorData.username}`} >
                                             {CreatorData.name[0].toUpperCase()}
                                         </Avatar>
                                     }

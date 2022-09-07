@@ -49,7 +49,7 @@ const Comment = ({ blogid, comment, setComments }) => {
         <Card sx={{ maxWidth: '99%' }} style={{ marginButtom: '20px' }}>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `http://localhost:3000/profile/${CreatorData.username}`} >
+                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" style={{ cursor: 'pointer' }} onClick={() => window.location.href = `${window.location.origin}/profile/${CreatorData.username}`} >
                         {CreatorData.name[0].toUpperCase()}
                     </Avatar>
                 }

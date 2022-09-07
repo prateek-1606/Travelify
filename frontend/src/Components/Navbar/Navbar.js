@@ -188,7 +188,7 @@ export default function MiniDrawer({ data, setData }) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={() => window.location.href = `http://localhost:3000/profile/${username}`}>My Profile</MenuItem>
+                            <MenuItem onClick={() => window.location.href = `${window.location.origin}/profile/${username}`}>My Profile</MenuItem>
                             <MenuItem onClick={handlelogout}>Logout</MenuItem>
                         </Menu>
                     </div>
