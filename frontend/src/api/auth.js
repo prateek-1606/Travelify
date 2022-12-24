@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'https://travelifybackend.herokuapp.com'
+const URL = 'https://travellify.onrender.com'
 
 export const login = async ({ email, password }) => {
     try {
