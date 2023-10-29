@@ -10,7 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Login = () => {
-  const [data, SetData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
   const history = useNavigate();
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    SetData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
